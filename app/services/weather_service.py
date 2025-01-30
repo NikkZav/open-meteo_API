@@ -1,40 +1,36 @@
 import requests
 from http import HTTPStatus
-
-if __name__ == "__main__":
-    import sys
-    sys.path.append("app")
-
+from sqlalchemy.orm import Session
 from schemas.coordinates import CoordinatesSchema
 from schemas.weather import WeatherSchema
-from datetime import datetime
-from sqlalchemy.orm import Session
 from models import CityModel
 
 
 URL = "https://api.open-meteo.com/v1/forecast"
 
 
-def parse_weather(json_data: dict) -> WeatherSchema:
+def parse_weather(json_data: dict, params: dict) -> WeatherSchema:
     """Парсит данные о погоде."""
 
     current_weather = json_data.get("current_weather", {})
 
-    temperature = current_weather.get("temperature", "Неизвестно")
-    wind_speed = current_weather.get("windspeed", "Неизвестно")
+    temperature = current_weather.get("temperature", "Uknonwn")
+    wind_speed = current_weather.get("windspeed", "Uknonwn")
 
-    # В current_weather не всегда есть pressure_msl
-    if "pressure_msl" in current_weather:
-        pressure = current_weather["pressure_msl"]
-    else:
-        # Поэтому берем статистику за последний час
-        pressures = json_data.get("hourly", {}).get("pressure_msl")
-        pressure = pressures[-1] if pressures else "Неизвестно"
+    others = {}
+    # В current_weather не всегда есть все данные
+    for property_name in params.get("minutely_15", '').split(','):
+        if property_name in current_weather:
+            others[property_name] = current_weather[property_name]
+        else:
+            # Поэтому берем последнюю статистику
+            properties = json_data.get("minutely_15", {}).get(property_name)
+            others[property_name] = properties[-1] if properties else "Uknonwn"
 
     return WeatherSchema(
         temperature=temperature,
         wind_speed=wind_speed,
-        pressure_msl=pressure
+        **others
     )
 
 
@@ -46,7 +42,7 @@ def get_weather_by_coordinates(coordinates: CoordinatesSchema
         "latitude": coordinates.latitude,
         "longitude": coordinates.longitude,
         "current_weather": "true",
-        "hourly": "pressure_msl",
+        "minutely_15": "pressure_msl,relative_humidity_2m,rain"
     }
 
     response = requests.get(URL, params=params)
@@ -57,12 +53,10 @@ def get_weather_by_coordinates(coordinates: CoordinatesSchema
         }
 
     json_data = response.json()
-    return parse_weather(json_data)
+    return parse_weather(json_data, params=params)
 
 
-def get_weather_by_city(city: CityModel,
-                        time: datetime,
-                        db: Session) -> WeatherSchema:
+def get_weather_in_city(city: CityModel, db: Session) -> WeatherSchema:
     """Получает погоду по названию города."""
     coordinates = CoordinatesSchema(
         latitude=city.latitude,
@@ -73,7 +67,6 @@ def get_weather_by_city(city: CityModel,
 
 def build_weather_response(weather: WeatherSchema,
                            requested_params: dict) -> dict:
-    # Преобразование Pydantic модели в словарь
     weather_dict = weather.model_dump()
     weather_response = {
         key: weather_dict.get(key)
@@ -81,9 +74,3 @@ def build_weather_response(weather: WeatherSchema,
         if include
     }
     return weather_response
-
-
-if __name__ == "__main__":
-    coordinates = CoordinatesSchema(latitude=55.75, longitude=37.61)
-    weather = get_weather_by_coordinates(coordinates)
-    print(weather)

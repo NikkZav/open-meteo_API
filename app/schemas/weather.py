@@ -6,4 +6,4 @@ class WeatherSchema(BaseModel):
     wind_speed: float
     pressure_msl: float
     rain: float = None
-    humidity: float = None
+    relative_humidity_2m: float = None

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from http import HTTPStatus
 from sqlalchemy.orm import Session
 from services import weather_service
-from services.city_service import get_city
+from services.city_service import get_city_or_none
 from core.db import SessionLocal
 from schemas.coordinates import CoordinatesSchema
 from datetime import datetime
@@ -34,20 +34,20 @@ def get_weather_in_city_endpoint(
     time: datetime | None = None,
     temperature: bool = True,
     wind_speed: bool = False,
-    humidity: bool = False,
+    relative_humidity_2m: bool = False,
     rain: bool = False,
     db: Session = Depends(get_db)
 ):
-    if (city := get_city(city_name, db)) is None:
+    if (city := get_city_or_none(city_name, db)) is None:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
                             detail="Город не найден")
-    weather = weather_service.get_weather_by_city(city, time, db)
+    weather = weather_service.get_weather_in_city(city, db)
     weather_response = weather_service.build_weather_response(
         weather,
         requested_params={
             "temperature": temperature,
             "wind_speed": wind_speed,
-            "humidity": humidity,
+            "relative_humidity_2m": relative_humidity_2m,
             "rain": rain,
         }
     )
