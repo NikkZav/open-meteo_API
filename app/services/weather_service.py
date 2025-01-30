@@ -7,6 +7,9 @@ if __name__ == "__main__":
 
 from schemas.coordinates import CoordinatesSchema
 from schemas.weather import WeatherSchema
+from datetime import datetime
+from sqlalchemy.orm import Session
+from models import CityModel
 
 
 URL = "https://api.open-meteo.com/v1/forecast"
@@ -55,6 +58,29 @@ def get_weather_by_coordinates(coordinates: CoordinatesSchema
 
     json_data = response.json()
     return parse_weather(json_data)
+
+
+def get_weather_by_city(city: CityModel,
+                        time: datetime,
+                        db: Session) -> WeatherSchema:
+    """Получает погоду по названию города."""
+    coordinates = CoordinatesSchema(
+        latitude=city.latitude,
+        longitude=city.longitude
+    )
+    return get_weather_by_coordinates(coordinates)
+
+
+def build_weather_response(weather: WeatherSchema,
+                           requested_params: dict) -> dict:
+    # Преобразование Pydantic модели в словарь
+    weather_dict = weather.model_dump()
+    weather_response = {
+        key: weather_dict.get(key)
+        for key, include in requested_params.items()
+        if include
+    }
+    return weather_response
 
 
 if __name__ == "__main__":

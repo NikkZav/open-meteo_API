@@ -1,6 +1,6 @@
 import time
 import asyncio
-from models.city import CityModel
+from models import CityModel
 from services.city_service import get_cities
 from core.db import Session
 from services.weather_service import get_weather_by_coordinates

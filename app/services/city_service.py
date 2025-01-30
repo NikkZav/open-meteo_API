@@ -1,9 +1,21 @@
-from sqlalchemy.orm import Session
-from models.city import CityModel
+from sqlalchemy.orm import Session, joinedload
+from models import CityModel, WeatherModel
 from schemas.city import CitySchema
 from schemas.coordinates import CoordinatesSchema
 from schemas.weather import WeatherSchema
 from services.weather_service import get_weather_by_coordinates
+from datetime import datetime
+
+
+def get_city(recognizer: str | int, db: Session) -> CityModel:
+    if isinstance(recognizer, str):
+        condition = CityModel.name == recognizer
+    elif isinstance(recognizer, int):
+        condition = CityModel.id == recognizer
+    else:
+        raise ValueError("Invalid type for recognizer. Expected str or int.")
+
+    return db.query(CityModel).filter(condition).first()
 
 
 class CityService:
@@ -12,18 +24,22 @@ class CityService:
         self.db = db
 
     def check_city_existence(self) -> bool:
-        same_name_cities = self.db.query(CityModel).filter(
-            CityModel.name == self.city_data.name)
-        return same_name_cities.first() is not None
+        return get_city(self.city_data.name, self.db) is not None
 
     def add_weather_to_city(self) -> None:
         weather: WeatherSchema = get_weather_by_coordinates(
             CoordinatesSchema(
-                latitude=self.city_data.latitude,
-                longitude=self.city_data.longitude
+                latitude=self.city.latitude,
+                longitude=self.city.longitude
             )
         )
-        self.city.weather = weather.model_dump_json()
+        new_weather = WeatherModel(
+            city_id=self.city.id,
+            time=datetime.now(),
+            **weather.model_dump()
+        )
+        self.db.add(new_weather)
+        self.db.commit()
 
     def add_city(self) -> CityModel:
         self.city = CityModel(
@@ -31,25 +47,22 @@ class CityService:
             latitude=self.city_data.latitude,
             longitude=self.city_data.longitude
         )
-        self.add_weather_to_city()
-
         self.db.add(self.city)
         self.db.commit()
         self.db.refresh(self.city)
+
+        self.add_weather_to_city()
+
         return self.city
 
-    def get_cities(self) -> list[dict]:
-        cities = self.db.query(CityModel).all()
-        # В ТЗ просят выводить только список городов
-        # но я добавил всю информацию, включая погоду
-        for city in cities:
-            city.weather = city.parsed_weather
-        return [
-            {
-                "id": city.id,
-                "name": city.name,
-                "latitude": city.latitude,
-                "longitude": city.longitude,
-                "weather": city.weather
-            } for city in cities
-        ]
+    def get_cities(self, with_weather: bool = False) -> list[str | dict]:
+        if with_weather:
+            # В ТЗ просят выводить только список городов
+            # но я добавил (опционально) всю информацию, включая погоду
+            cities = self.db.query(CityModel).options(
+                joinedload(CityModel.weather_records)
+            ).all()
+            return cities
+        else:
+            return [city.name for city in
+                    self.db.query(CityModel).all()]
