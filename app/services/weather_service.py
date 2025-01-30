@@ -1,9 +1,11 @@
 import requests
 from http import HTTPStatus
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 from schemas.coordinates import CoordinatesSchema
 from schemas.weather import WeatherSchema
-from models import CityModel
+from models import CityModel, WeatherModel
+from datetime import datetime
 
 
 URL = "https://api.open-meteo.com/v1/forecast"
@@ -36,7 +38,7 @@ def parse_weather(json_data: dict, params: dict) -> WeatherSchema:
 
 def get_weather_by_coordinates(coordinates: CoordinatesSchema
                                ) -> WeatherSchema:
-    """Получает погоду по координатам."""
+    """Возвращает погоду по координатам."""
 
     params = {
         "latitude": coordinates.latitude,
@@ -56,13 +58,26 @@ def get_weather_by_coordinates(coordinates: CoordinatesSchema
     return parse_weather(json_data, params=params)
 
 
-def get_weather_in_city(city: CityModel, db: Session) -> WeatherSchema:
-    """Получает погоду по названию города."""
+def get_weather_in_city(city: CityModel) -> WeatherSchema:
+    """Возвращает погоду по названию города."""
     coordinates = CoordinatesSchema(
         latitude=city.latitude,
         longitude=city.longitude
     )
     return get_weather_by_coordinates(coordinates)
+
+
+def get_weather_in_city_on_time(city: CityModel,
+                                time: datetime) -> WeatherSchema:
+    """Возвращает погоду в городе во время, наиболее близкое к указанному."""
+    if not city.weather_records:
+        raise ValueError("Нет данных о погоде для указанного города.")
+
+    # Находим ближайшую запись без явной фильтрации
+    closest_record = min(city.weather_records,
+                         key=lambda record: abs(record.time - time))
+
+    return WeatherSchema.model_validate(closest_record, from_attributes=True)
 
 
 def build_weather_response(weather: WeatherSchema,

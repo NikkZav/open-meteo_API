@@ -25,26 +25,31 @@ class CityService:
         return get_city_or_none(self.city_data.name, self.db) is not None
 
     def add_weather_to_city(self) -> None:
+        """Добавление нового измерения погоды для города."""
         weather: WeatherSchema = get_weather_in_city(self.city)
         new_weather = WeatherModel(
             city_id=self.city.id,
-            time=datetime.now(),
             **weather.model_dump()
         )
+        new_weather.time = datetime.now()
         self.db.add(new_weather)
-        self.db.commit()
 
     def add_city(self) -> CityModel:
+        """Добавление города и начального прогноза."""
         self.city = CityModel(
             name=self.city_data.name,
             latitude=self.city_data.latitude,
             longitude=self.city_data.longitude
         )
-        self.db.add(self.city)
-        self.db.commit()
-        self.db.refresh(self.city)
-
-        self.add_weather_to_city()
+        try:
+            self.db.add(self.city)
+            self.db.flush()  # Фиксируем id города перед добавлением погоды
+            self.add_weather_to_city()  # Добавляем погоду к городу
+            self.db.commit()
+            self.db.refresh(self.city)
+        except Exception as e:
+            self.db.rollback()
+            raise e
 
         return self.city
 

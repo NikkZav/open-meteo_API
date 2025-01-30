@@ -41,10 +41,11 @@ def get_weather_in_city_endpoint(
     if (city := get_city_or_none(city_name, db)) is None:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
                             detail="Город не найден")
-    weather = weather_service.get_weather_in_city(city, db)
+    weather = weather_service.get_weather_in_city_on_time(city, time)
     weather_response = weather_service.build_weather_response(
         weather,
         requested_params={
+            "time": True,
             "temperature": temperature,
             "wind_speed": wind_speed,
             "relative_humidity_2m": relative_humidity_2m,

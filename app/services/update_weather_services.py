@@ -14,9 +14,16 @@ async def periodic_weather_update(city: CityModel, db: Session):
         if not get_city_or_none(city.id, db):
             print(f"Город ID {city.id} удалён. Останавливаем обновление.")
             break
-        await asyncio.sleep(60)  # 15 минут
+
+        await asyncio.sleep(15*60)  # 15 минут
+
         print(f"Обновляем погоду для города ID {city.id}")
-        city_service.add_weather_to_city()
+        try:
+            city_service.add_weather_to_city()
+            db.commit()
+        except Exception as e:
+            print(f"Ошибка при обновлении погоды: {e}")
+            db.rollback()
 
 
 async def create_periodic_weather_update_task(city: CityModel, db: Session):
