@@ -17,6 +17,10 @@ async def get_weather_endpoint(
     weather_query_params: WeatherQueryParams = Depends(),
     db: Session = Depends(get_db)
 ):
+    """
+    Метод принимает координаты и возвращает погоду в текущее время.
+    Возвращаемые параметры погоды определюятся через qurey-параметры.
+    """
     weather = weather_service.get_weather_closest_to_time_by_coordinates(
         coordinates=coordinates,
         time=datetime.now(),
@@ -33,6 +37,11 @@ def get_weather_in_city_endpoint(
     weather_query_params: WeatherQueryParams = Depends(),
     db: Session = Depends(get_db)
 ):
+    """
+    Метод принимает название города и время,
+    возвращает для него погоду на текущий день в указанное время.
+    Возвращаемые параметры погоды определюятся через qurey-параметры.
+    """
     if (city := get_city_or_none(city_name, db)) is None:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
                             detail="Город не найден")

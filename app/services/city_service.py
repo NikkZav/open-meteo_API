@@ -7,6 +7,7 @@ from services.common_utils import get_city_or_none
 
 
 class CityService:
+    """Сервис для работы с городами."""
     def __init__(self, db: Session, city: CitySchema | CityModel = None):
         self.db = db
         if isinstance(city, CityModel):
@@ -16,6 +17,20 @@ class CityService:
 
     def check_city_existence(self) -> bool:
         return get_city_or_none(self.city_data.name, self.db) is not None
+    
+    def _update_existing_weather_record(self, existing_record,
+                                        weather: WeatherSchema):
+        """Обновляет существующую запись о погоде."""
+        for key, value in weather.model_dump().items():
+            setattr(existing_record, key, value)
+
+    def _add_new_weather_record(self, weather: WeatherSchema):
+        """Добавляет новую запись о погоде."""
+        new_weather = WeatherModel(
+            city_id=self.city.id,
+            **weather.model_dump()
+        )
+        self.db.add(new_weather)
 
     def refresh_weather_records_for_city(self) -> None:
         """
@@ -25,30 +40,23 @@ class CityService:
         Получает актуальный прогноз погоды и синхронизирует его с базой данных,
         добавляя новые записи или обновляя существующие.
         """
-        weather_records: list[WeatherSchema] = get_weather_records_in_city(
-            self.city)
-
+        weather_records: list[WeatherSchema] = \
+            get_weather_records_in_city(self.city)
         # Создаём словарь с существующими записями по времени
-        existing_records = {
-            record.time: record for record in self.city.weather_records
-        }
+        existing_records = {record.time: record for record
+                            in self.city.weather_records}
 
         for weather in weather_records:
             if weather.time in existing_records:
                 # Обновляем существующую запись
-                existing_record = existing_records[weather.time]
-                for key, value in weather.model_dump().items():
-                    setattr(existing_record, key, value)
+                self._update_existing_weather_record(
+                    existing_records[weather.time], weather)
             else:
                 # Добавляем новую запись (если нужно)
-                new_weather = WeatherModel(
-                    city_id=self.city.id,
-                    **weather.model_dump()
-                )
-                self.db.add(new_weather)
+                self._add_new_weather_record(weather)
 
     def add_city(self) -> CityModel:
-        """Добавление города и начального прогноза."""
+        """Добавление города в БД и обновление погоды для него"""
         self.city = CityModel(
             name=self.city_data.name,
             latitude=self.city_data.latitude,
@@ -66,8 +74,8 @@ class CityService:
 
         return self.city
 
-    def get_cities(self, include_weather: bool = False
-                   ) -> list[str | dict]:
+    def get_cities(self, include_weather: bool = False) -> list[str | dict]:
+        """Получение списка городов из БД + (опционально) связанные даные"""
         if include_weather:
             # В ТЗ просят выводить только список городов
             # но я добавил возможность получить всю информацию, включая погоду

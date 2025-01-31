@@ -66,7 +66,7 @@ def get_weather_closest_to_time_in_city(city: CityModel,
                                         time: datetime) -> WeatherSchema:
     """
     Возвращает погоду в городе во время, наиболее близкое к указанному.
-    Поиск производиться среди имеющихся записей в БД
+    Поиск производиться среди имеющихся записей в БД.
     """
     if not city.weather_records:
         raise ValueError("Нет данных о погоде для указанного города.")
@@ -110,8 +110,6 @@ def build_weather_response(weather: WeatherSchema,
                            query_params: WeatherQueryParams) -> dict:
     """Формирует ответ на основе запрошенных параметров."""
     weather_dict = weather.model_dump()
-
-    # Преобразуем параметры запроса в словарь
     query_params_dict = query_params.model_dump()
 
     weather_response = {

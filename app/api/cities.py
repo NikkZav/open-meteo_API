@@ -13,6 +13,10 @@ router = APIRouter()
 @router.post("/add_city", response_model=dict, status_code=HTTPStatus.CREATED)
 async def add_city_endpoint(city_data: CitySchema,
                             db: Session = Depends(get_db)):
+    """
+    Метод принимает название города и его координаты и
+    добавляет в список городов для которых отслеживается прогноз погоды
+    """
     city_service = CityService(db, city_data)
     # Проверяем существование города
     if city_service.check_city_existence():
@@ -30,5 +34,6 @@ async def add_city_endpoint(city_data: CitySchema,
 @router.get("/cities")
 def get_cities(include_weather: bool | None = None,
                db: Session = Depends(get_db)):
+    """Метод возвращает список городов. Есть опция вывести вместе с погодой"""
     city_service = CityService(db)
     return city_service.get_cities(include_weather)
