@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Integer, Float, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
-from core.db import Base
+from app.db import Base
 
 
 class WeatherModel(Base):
@@ -9,8 +9,8 @@ class WeatherModel(Base):
     id = Column(Integer, primary_key=True, index=True)
     city_id = Column(Integer, ForeignKey("cities.id"))
     time = Column(DateTime, nullable=False)
-    temperature = Column(Float, nullable=True)
-    wind_speed = Column(Float, nullable=True)
+    temperature_2m = Column(Float, nullable=True)
+    wind_speed_10m = Column(Float, nullable=True)
     pressure_msl = Column(Float, nullable=True)
     rain = Column(Float, nullable=True)
     relative_humidity_2m = Column(Float, nullable=True)

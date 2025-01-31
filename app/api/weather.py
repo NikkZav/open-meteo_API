@@ -3,37 +3,33 @@ from http import HTTPStatus
 from sqlalchemy.orm import Session
 from services import weather_service
 from services.city_service import get_city_or_none
-from core.db import SessionLocal
 from schemas.coordinates import CoordinatesSchema
 from datetime import datetime
+from db import get_db
 
 router = APIRouter()
 
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
 @router.get("/weather")
 async def get_weather_endpoint(coordinates: CoordinatesSchema = Depends()):
-    weather = weather_service.get_weather_by_coordinates(coordinates)
+    weather = weather_service.get_weather_closest_to_time_by_coordinates(
+        coordinates=coordinates,
+        time=datetime.now()
+    )
     # В ТЗ по такому запросу требуется возвразать только
     # "данные о температуре, скорости ветра и атмосферном давлении"
-    return {"temperature": weather.temperature,
-            "wind_speed": weather.wind_speed,
-            "pressure_msl": weather.pressure_msl}
+    return {"temperature_2m": weather.temperature_2m,
+            "wind_speed_10m": weather.wind_speed_10m,
+            "pressure_msl": weather.pressure_msl,
+            "time": weather.time}
 
 
 @router.get("/weather/{city_name}")
 def get_weather_in_city_endpoint(
     city_name: str,
     time: datetime | None = None,
-    temperature: bool = True,
-    wind_speed: bool = False,
+    temperature_2m: bool = True,
+    wind_speed_10m: bool = False,
     relative_humidity_2m: bool = False,
     rain: bool = False,
     db: Session = Depends(get_db)
@@ -46,8 +42,8 @@ def get_weather_in_city_endpoint(
         weather,
         requested_params={
             "time": True,
-            "temperature": temperature,
-            "wind_speed": wind_speed,
+            "temperature_2m": temperature_2m,
+            "wind_speed_10m": wind_speed_10m,
             "relative_humidity_2m": relative_humidity_2m,
             "rain": rain,
         }

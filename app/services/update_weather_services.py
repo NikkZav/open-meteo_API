@@ -1,33 +1,38 @@
 import asyncio
 from sqlalchemy.orm import Session
-from services.city_service import CityService, get_city_or_none
+from services.city_service import CityService
 from models import CityModel
-
+from db import SessionLocal
 
 tasks = {}
 
 
-async def periodic_weather_update(city: CityModel, db: Session):
+async def periodic_weather_update(city_id: int):
     """Обновление погоды для города каждые 15 минут."""
-    city_service = CityService(db, city)
     while True:
-        if not get_city_or_none(city.id, db):
-            print(f"Город ID {city.id} удалён. Останавливаем обновление.")
-            break
+        await asyncio.sleep(15)  # 15 минут
+        print(f"Обновляем погоду для города ID {city_id}")
 
-        await asyncio.sleep(15*60)  # 15 минут
-
-        print(f"Обновляем погоду для города ID {city.id}")
+        # Создаём и управляем сессией
+        db = SessionLocal()
         try:
-            city_service.add_weather_to_city()
+            city = db.query(CityModel).get(city_id)
+            if not city:
+                print(f"Город ID {city_id} удалён. Останавливаем обновление.")
+                break
+
+            city_service = CityService(db, city)
+            city_service.refresh_weather_records_for_city()
             db.commit()
         except Exception as e:
             print(f"Ошибка при обновлении погоды: {e}")
             db.rollback()
+        finally:
+            db.close()
 
 
-async def create_periodic_weather_update_task(city: CityModel, db: Session):
+async def create_periodic_weather_update_task(city_id: int):
     """Создание задачи для периодического обновления погоды для города."""
-    tasks[city.id] = asyncio.create_task(
-        periodic_weather_update(city, db)
+    tasks[city_id] = asyncio.create_task(
+        periodic_weather_update(city_id)
     )

@@ -4,18 +4,10 @@ from services.city_service import CityService
 from services.update_weather_services import \
     create_periodic_weather_update_task
 from schemas.city import CitySchema
-from core.db import SessionLocal
 from http import HTTPStatus
+from db import get_db
 
 router = APIRouter()
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @router.post("/add_city")
@@ -29,7 +21,7 @@ async def add_city_endpoint(city_data: CitySchema,
     # Добавляем новый город в БД
     new_city = city_service.add_city()
     # Создаем задачу обновления погоды для нового города
-    await create_periodic_weather_update_task(city=new_city, db=db)
+    await create_periodic_weather_update_task(city_id=new_city.id)
     return {"message": "Город успешно добавлен",
             "id": new_city.id,
             "name": new_city.name}

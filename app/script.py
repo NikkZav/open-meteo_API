@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent))
 
 from api import weather, cities
-from core.db import create_tables
+from app.db import create_tables
 
 from fastapi import FastAPI
 import uvicorn
