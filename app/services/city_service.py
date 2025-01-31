@@ -66,9 +66,9 @@ class CityService:
 
         return self.city
 
-    def get_cities(self, all_statistic_with_weather: bool = False
+    def get_cities(self, include_weather: bool = False
                    ) -> list[str | dict]:
-        if all_statistic_with_weather:
+        if include_weather:
             # В ТЗ просят выводить только список городов
             # но я добавил возможность получить всю информацию, включая погоду
             cities = self.db.query(CityModel).options(

@@ -3,7 +3,7 @@ from http import HTTPStatus
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from schemas.coordinates import CoordinatesSchema
-from schemas.weather import WeatherSchema
+from schemas.weather import WeatherSchema, WeatherQueryParams
 from models import CityModel, WeatherModel
 from datetime import datetime, time
 from services.common_utils import get_city_or_none
@@ -15,7 +15,10 @@ WEATHER_PARAMS = ','.join(WeatherSchema.__annotations__.keys()
 
 
 def parse_weather(json_data: dict) -> list[WeatherSchema]:
-    """Парсит данные о погоде."""
+    """
+    Распоковывает полученные от open-meteo данные
+    в список объектов WeatherSchema - прогноз погоды на текущий день.
+    """
     weather_forecast = {}
     param_names = WEATHER_PARAMS.split(",") + ["time"]
     for param_name in param_names:
@@ -35,7 +38,7 @@ def parse_weather(json_data: dict) -> list[WeatherSchema]:
 
 def get_weather_records_by_coordinates(coordinates: CoordinatesSchema
                                        ) -> list[WeatherSchema]:
-    """Возвращает прогноз погоды по координатам."""
+    """Возвращает прогноз погоды по координатам на текущий день."""
     url_params = {
         "latitude": coordinates.latitude,
         "longitude": coordinates.longitude,
@@ -55,6 +58,7 @@ def get_weather_records_by_coordinates(coordinates: CoordinatesSchema
 def search_clothest_to_time_weather_record(
         weather_records: list[WeatherSchema | WeatherModel],
         time: datetime) -> WeatherSchema | WeatherModel:
+    """Возвращает запись о погоде, время которой ближе всего к указанному."""
     return min(weather_records, key=lambda record: abs(record.time - time))
 
 
@@ -80,7 +84,7 @@ def get_weather_closest_to_time_by_coordinates(
         db: Session) -> WeatherSchema:
     """
     Возвращает погоду в городе во время, наиболее близкое к указанному.
-    Самое значение формируется запросом к Open-Meteo API, если его нет в БД
+    Само значение формируется запросом к Open-Meteo API, если его нет в БД
     """
     if city := get_city_or_none(coordinates, db):
         # Если город есть в БД, то ищем ближайшую запись в БД
@@ -103,11 +107,17 @@ def get_weather_records_in_city(city: CityModel) -> list[WeatherSchema]:
 
 
 def build_weather_response(weather: WeatherSchema,
-                           requested_params: dict) -> dict:
+                           query_params: WeatherQueryParams) -> dict:
+    """Формирует ответ на основе запрошенных параметров."""
     weather_dict = weather.model_dump()
+
+    # Преобразуем параметры запроса в словарь
+    query_params_dict = query_params.model_dump()
+
     weather_response = {
         key: weather_dict.get(key)
-        for key, include in requested_params.items()
+        for key, include in query_params_dict.items()
         if include
     }
+    weather_response["time"] = weather.time.isoformat()
     return weather_response

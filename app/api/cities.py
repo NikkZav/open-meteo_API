@@ -10,7 +10,7 @@ from db import get_db
 router = APIRouter()
 
 
-@router.post("/add_city")
+@router.post("/add_city", response_model=dict, status_code=HTTPStatus.CREATED)
 async def add_city_endpoint(city_data: CitySchema,
                             db: Session = Depends(get_db)):
     city_service = CityService(db, city_data)
@@ -28,7 +28,7 @@ async def add_city_endpoint(city_data: CitySchema,
 
 
 @router.get("/cities")
-def get_cities(all_statistic_with_weather: bool | None = None,
+def get_cities(include_weather: bool | None = None,
                db: Session = Depends(get_db)):
     city_service = CityService(db)
-    return city_service.get_cities(all_statistic_with_weather)
+    return city_service.get_cities(include_weather)
