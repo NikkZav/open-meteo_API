@@ -1,16 +1,9 @@
 from sqlalchemy.orm import Session, joinedload
 from models import CityModel, WeatherModel
 from schemas.city import CitySchema
-from schemas.coordinates import CoordinatesSchema
 from schemas.weather import WeatherSchema
-from services.weather_service import get_weather_in_city
-from datetime import datetime
-
-
-def get_city_or_none(recognizer: str | int, db: Session) -> CityModel | None:
-    condition = (CityModel.name == recognizer) \
-        if isinstance(recognizer, str) else (CityModel.id == recognizer)
-    return db.query(CityModel).filter(condition).first()
+from services.weather_service import get_weather_records_in_city
+from services.common_utils import get_city_or_none
 
 
 class CityService:
@@ -32,7 +25,8 @@ class CityService:
         Получает актуальный прогноз погоды и синхронизирует его с базой данных,
         добавляя новые записи или обновляя существующие.
         """
-        weather_records: list[WeatherSchema] = get_weather_in_city(self.city)
+        weather_records: list[WeatherSchema] = get_weather_records_in_city(
+            self.city)
 
         # Создаём словарь с существующими записями по времени
         existing_records = {

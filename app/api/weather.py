@@ -11,10 +11,14 @@ router = APIRouter()
 
 
 @router.get("/weather")
-async def get_weather_endpoint(coordinates: CoordinatesSchema = Depends()):
+async def get_weather_endpoint(
+    coordinates: CoordinatesSchema = Depends(),
+    db: Session = Depends(get_db)
+):
     weather = weather_service.get_weather_closest_to_time_by_coordinates(
         coordinates=coordinates,
-        time=datetime.now()
+        time=datetime.now(),
+        db=db
     )
     # В ТЗ по такому запросу требуется возвразать только
     # "данные о температуре, скорости ветра и атмосферном давлении"
@@ -37,7 +41,7 @@ def get_weather_in_city_endpoint(
     if (city := get_city_or_none(city_name, db)) is None:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
                             detail="Город не найден")
-    weather = weather_service.get_weather_in_city_on_time(city, time)
+    weather = weather_service.get_weather_closest_to_time_in_city(city, time)
     weather_response = weather_service.build_weather_response(
         weather,
         requested_params={
