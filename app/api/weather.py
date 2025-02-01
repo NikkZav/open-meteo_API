@@ -1,13 +1,14 @@
-from fastapi import APIRouter, Depends, HTTPException
-from http import HTTPStatus
+from datetime import datetime
+
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+
+from db import get_db
+from schemas.coordinates import CoordinatesSchema
+from schemas.weather import WeatherQueryParams, WeatherResponse
 from services import weather_service
 from services.city_service import get_city_or_none
 from services.validators import CityValidator, TimeValidator
-from schemas.coordinates import CoordinatesSchema
-from schemas.weather import WeatherQueryParams, WeatherResponse
-from datetime import datetime
-from db import get_db
 
 router = APIRouter()
 

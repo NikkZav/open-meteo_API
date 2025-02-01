@@ -1,9 +1,11 @@
-from fastapi import HTTPException
+from datetime import date, datetime
 from http import HTTPStatus
+
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
+
 from models import CityModel
 from schemas.city import CitySchema
-from datetime import datetime, date
 
 
 class CityValidator:

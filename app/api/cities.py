@@ -1,12 +1,14 @@
-from fastapi import APIRouter, Depends, HTTPException
+from http import HTTPStatus
+
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+
+from db import get_db
+from schemas.city import CityResponse, CitySchema
 from services.city_service import CityService
-from services.validators import CityValidator
 from services.update_weather_services import \
     create_periodic_weather_update_task
-from schemas.city import CitySchema, CityResponse
-from http import HTTPStatus
-from db import get_db
+from services.validators import CityValidator
 
 router = APIRouter()
 

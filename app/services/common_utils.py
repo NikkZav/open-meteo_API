@@ -1,5 +1,6 @@
-from sqlalchemy.orm import Session
 from sqlalchemy import and_
+from sqlalchemy.orm import Session
+
 from models import CityModel
 from schemas.coordinates import CoordinatesSchema
 

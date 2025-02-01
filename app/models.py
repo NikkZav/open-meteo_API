@@ -1,6 +1,7 @@
-from sqlalchemy import Column, String, Integer, Float, DateTime, ForeignKey
+from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
-from app.db import Base
+
+from db import Base
 
 
 class WeatherModel(Base):
@@ -26,4 +27,3 @@ class CityModel(Base):
     latitude = Column(Float, nullable=False)
     longitude = Column(Float, nullable=False)
     weather_records = relationship("WeatherModel", back_populates="city")
-

@@ -1,13 +1,14 @@
-import requests
-from http import HTTPStatus
-from sqlalchemy.orm import Session
-from sqlalchemy import func
-from schemas.coordinates import CoordinatesSchema
-from schemas.weather import WeatherSchema, WeatherQueryParams
-from models import CityModel, WeatherModel
 from datetime import datetime, time
-from services.common_utils import get_city_or_none
+from http import HTTPStatus
 
+import requests
+from sqlalchemy import func
+from sqlalchemy.orm import Session
+
+from models import CityModel, WeatherModel
+from schemas.coordinates import CoordinatesSchema
+from schemas.weather import WeatherQueryParams, WeatherSchema
+from services.common_utils import get_city_or_none
 
 URL = "https://api.open-meteo.com/v1/forecast"
 WEATHER_PARAMS = ','.join(WeatherSchema.__annotations__.keys()

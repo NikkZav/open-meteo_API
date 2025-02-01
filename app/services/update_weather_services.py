@@ -1,7 +1,8 @@
 import asyncio
-from services.city_service import CityService
-from models import CityModel
+
 from db import get_db_session
+from models import CityModel
+from services.city_service import CityService
 
 tasks: dict[int, asyncio.Task] = {}
 
@@ -16,7 +17,8 @@ async def periodic_weather_update(city_id: int):
             try:
                 city = db.query(CityModel).get(city_id)
                 if not city:
-                    print(f"Город ID {city_id} удалён. Останавливаем обновление.")
+                    print(f"Город ID {city_id} удалён. "
+                          "Останавливаем обновление.")
                     break
 
                 city_service = CityService(db, city)

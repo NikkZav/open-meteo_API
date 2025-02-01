@@ -1,6 +1,7 @@
+from pydantic import BaseModel
+
 from .coordinates import CoordinatesSchema
 from .weather import WeatherResponse
-from pydantic import BaseModel
 
 
 class CitySchema(CoordinatesSchema):

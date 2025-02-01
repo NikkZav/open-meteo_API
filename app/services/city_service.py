@@ -1,13 +1,15 @@
 from sqlalchemy.orm import Session, joinedload
+
 from models import CityModel, WeatherModel
-from schemas.city import CitySchema, CityResponse
-from schemas.weather import WeatherSchema, WeatherResponse
-from services.weather_service import get_weather_records_in_city
+from schemas.city import CityResponse, CitySchema
+from schemas.weather import WeatherResponse, WeatherSchema
 from services.common_utils import get_city_or_none
+from services.weather_service import get_weather_records_in_city
 
 
 class CityService:
     """Сервис для работы с городами."""
+
     def __init__(self, db: Session, city: CitySchema | CityModel = None):
         self.db = db
         if isinstance(city, CityModel):
@@ -17,7 +19,7 @@ class CityService:
 
     def check_city_existence(self) -> bool:
         return get_city_or_none(self.city_data.name, self.db) is not None
-    
+
     def _update_existing_weather_record(self, existing_record,
                                         weather: WeatherSchema):
         """Обновляет существующую запись о погоде."""

@@ -1,22 +1,20 @@
 import sys
 from pathlib import Path
 
+import uvicorn
+from fastapi import FastAPI
+
+from api import cities, weather
+from db import create_tables
+
 # Добавляем путь к текущему каталогу в sys.path
 sys.path.append(str(Path(__file__).resolve().parent))
 
-from api import weather, cities
-from app.db import create_tables
-
-from fastapi import FastAPI
-import uvicorn
 
 app = FastAPI()
 
 # Создаём таблицы при старте приложения
 create_tables()
-
-# Запускаем обновление погоды
-# loop = asyncio.get_event_loop()
 
 app.include_router(weather.router, prefix="/api")
 app.include_router(cities.router, prefix="/api")
