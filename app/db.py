@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-
+from contextlib import contextmanager
 
 DATABASE_URL = "sqlite:///./weather.db"
 
@@ -16,6 +16,16 @@ def create_tables():
 
 
 def get_db():
+    """Используется в качестве FastAPI dependency."""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+@contextmanager
+def get_db_session():
+    """Используется в синхронном контексте (например, в фоновых задачах)."""
     db = SessionLocal()
     try:
         yield db
