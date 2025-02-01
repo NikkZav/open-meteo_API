@@ -4,14 +4,22 @@ from services.city_service import CityService
 from services.validators import CityValidator
 from services.update_weather_services import \
     create_periodic_weather_update_task
-from schemas.city import CitySchema
+from schemas.city import CitySchema, CityResponse
 from http import HTTPStatus
 from db import get_db
 
 router = APIRouter()
 
 
-@router.post("/add_city", response_model=dict, status_code=HTTPStatus.CREATED)
+@router.post(
+    "/add_city",
+    response_model=dict,
+    status_code=HTTPStatus.CREATED,
+    responses={
+        201: {"description": "Город успешно добавлен"},
+        409: {"description": "Город уже существует"}
+    }
+)
 async def add_city_endpoint(city_data: CitySchema,
                             db: Session = Depends(get_db)):
     """
@@ -32,7 +40,13 @@ async def add_city_endpoint(city_data: CitySchema,
             "name": new_city.name}
 
 
-@router.get("/cities")
+@router.get(
+    "/cities",
+    response_model=list[CityResponse | str],
+    responses={
+        200: {"description": "Список городов получен"},
+    }
+)
 def get_cities(include_weather: bool | None = None,
                db: Session = Depends(get_db)):
     """Метод возвращает список городов. Есть опция вывести вместе с погодой"""

@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session, joinedload
 from models import CityModel, WeatherModel
-from schemas.city import CitySchema
-from schemas.weather import WeatherSchema
+from schemas.city import CitySchema, CityResponse
+from schemas.weather import WeatherSchema, WeatherResponse
 from services.weather_service import get_weather_records_in_city
 from services.common_utils import get_city_or_none
 
@@ -74,15 +74,26 @@ class CityService:
 
         return self.city
 
-    def get_cities(self, include_weather: bool = False) -> list[str | dict]:
-        """Получение списка городов из БД + (опционально) связанные даные"""
+    def _convert_city_to_response(self, city: CityModel) -> CityResponse:
+        """Конвертация CityModel в CityResponse с вложенными WeatherResponse"""
+        weather_records = [
+            WeatherResponse.model_validate(record)
+            for record in city.weather_records
+        ]
+        return CityResponse(
+            id=city.id,
+            name=city.name,
+            latitude=city.latitude,
+            longitude=city.longitude,
+            weather_records=weather_records
+        )
+
+    def get_cities(self, include_weather: bool = False) -> list[CityResponse | str]:
+        """Получение списка городов из БД + (опционально) связанные данные"""
         if include_weather:
-            # В ТЗ просят выводить только список городов
-            # но я добавил возможность получить всю информацию, включая погоду
             cities = self.db.query(CityModel).options(
                 joinedload(CityModel.weather_records)
             ).all()
-            return cities
+            return [self._convert_city_to_response(city) for city in cities]
         else:
-            return [city.name for city in
-                    self.db.query(CityModel).all()]
+            return [city.name for city in self.db.query(CityModel).all()]

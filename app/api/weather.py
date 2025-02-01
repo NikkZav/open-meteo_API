@@ -5,14 +5,23 @@ from services import weather_service
 from services.city_service import get_city_or_none
 from services.validators import CityValidator, TimeValidator
 from schemas.coordinates import CoordinatesSchema
-from schemas.weather import WeatherQueryParams
+from schemas.weather import WeatherQueryParams, WeatherResponse
 from datetime import datetime
 from db import get_db
 
 router = APIRouter()
 
 
-@router.get("/weather")
+@router.get(
+    "/weather",
+    response_model=WeatherResponse,
+    response_model_exclude_unset=True,
+    responses={
+        200: {"description": "Успешное получение данных о погоде"},
+        404: {"description": "Город не найден"},
+        503: {"description": "Сервис погоды недоступен"}
+    }
+)
 async def get_weather_endpoint(
     coordinates: CoordinatesSchema = Depends(),
     weather_query_params: WeatherQueryParams = Depends(),
@@ -31,7 +40,15 @@ async def get_weather_endpoint(
                                                   weather_query_params)
 
 
-@router.get("/weather/{city_name}")
+@router.get(
+    "/weather/{city_name}",
+    response_model=WeatherResponse,
+    response_model_exclude_unset=True,
+    responses={
+        200: {"description": "Успешное получение данных о погоде для города"},
+        404: {"description": "Город не найден"}
+    }
+)
 def get_weather_in_city_endpoint(
     city_name: str,
     time: datetime,
