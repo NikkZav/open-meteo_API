@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 
 
-class CoordinatesSchema(BaseModel):
+class Coordinates(BaseModel):
     latitude: float = Field(
         ge=-90, le=90,
         description="Диапазон значений координат широты от -90 до 90"

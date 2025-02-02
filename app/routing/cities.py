@@ -3,12 +3,9 @@ from http import HTTPStatus
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from db import get_db
-from schemas.city import CityResponse, CitySchema
-from services.city_service import CityService
-from services.update_weather_services import \
-    create_periodic_weather_update_task
-from services.validators import CityValidator
+from repositories.db import get_db
+from schemas.city import CityResponse, City
+
 
 router = APIRouter()
 
@@ -22,7 +19,7 @@ router = APIRouter()
         409: {"description": "Город уже существует"}
     }
 )
-async def add_city_endpoint(city_data: CitySchema,
+async def add_city_endpoint(city_data: City,
                             db: Session = Depends(get_db)):
     """
     Метод принимает название города и его координаты и

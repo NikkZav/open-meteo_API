@@ -1,10 +1,10 @@
 from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from db import Base
+from .db import Base
 
 
-class WeatherModel(Base):
+class WeatherORM(Base):
     __tablename__ = "weather_records"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -16,14 +16,14 @@ class WeatherModel(Base):
     rain = Column(Float, nullable=True)
     relative_humidity_2m = Column(Float, nullable=True)
 
-    city = relationship("CityModel", back_populates="weather_records")
+    city = relationship("CityORM", back_populates="weather_records")
 
 
-class CityModel(Base):
+class CityORM(Base):
     __tablename__ = "cities"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
     latitude = Column(Float, nullable=False)
     longitude = Column(Float, nullable=False)
-    weather_records = relationship("WeatherModel", back_populates="city")
+    weather_records = relationship("WeatherORM", back_populates="city")

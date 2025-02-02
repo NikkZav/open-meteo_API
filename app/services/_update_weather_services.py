@@ -2,7 +2,7 @@ import asyncio
 
 from db import get_db_session
 from models import CityModel
-from services.city_service import CityService
+from app.services._city_service import CityService
 
 tasks: dict[int, asyncio.Task] = {}
 

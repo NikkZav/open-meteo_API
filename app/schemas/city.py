@@ -1,18 +1,19 @@
 from pydantic import BaseModel
 
-from .coordinates import CoordinatesSchema
-from .weather import WeatherResponse
+from .coordinates import Coordinates
+from .weather import Weather, WeatherResponse
 
 
-class CitySchema(CoordinatesSchema):
+class City(BaseModel):
     name: str
+    coordinates: Coordinates
+    weather_records: list[Weather] | None = None
 
 
 class CityResponse(BaseModel):
     id: int
     name: str
-    latitude: float
-    longitude: float
+    coordinates: Coordinates
     weather_records: list[WeatherResponse] | None = None
 
     class Config:

@@ -1,14 +1,15 @@
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
 from datetime import datetime
 
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-
-from db import get_db
-from schemas.coordinates import CoordinatesSchema
+from repositories.db import get_db
+from schemas.coordinates import Coordinates
 from schemas.weather import WeatherQueryParams, WeatherResponse
-from services import weather_service
-from services.city_service import get_city_or_none
-from services.validators import CityValidator, TimeValidator
+from depends import get_weather_service
+from services.weather_service import WeatherService
+from utils.exceptions import (CityNotFoundError, OpenMeteoAPIError, 
+                              TimeRangeError)
+
 
 router = APIRouter()
 
@@ -24,21 +25,19 @@ router = APIRouter()
     }
 )
 async def get_weather_endpoint(
-    coordinates: CoordinatesSchema = Depends(),
+    coordinates: Coordinates = Depends(),
     weather_query_params: WeatherQueryParams = Depends(),
-    db: Session = Depends(get_db)
+    weather_service: WeatherService = Depends(get_weather_service),
 ):
     """
     Метод принимает координаты и возвращает погоду в текущее время.
     Возвращаемые параметры погоды определюятся через qurey-параметры.
     """
-    weather = weather_service.get_weather_closest_to_time_by_coordinates(
-        coordinates=coordinates,
-        time=datetime.now(),
-        db=db
-    )
-    return weather_service.build_weather_response(weather,
-                                                  weather_query_params)
+    try:
+        weather = weather_service.get_weather_now(coordinates)
+    except OpenMeteoAPIError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    return WeatherResponse.build_response(weather, weather_query_params)
 
 
 @router.get(
@@ -47,26 +46,30 @@ async def get_weather_endpoint(
     response_model_exclude_unset=True,
     responses={
         200: {"description": "Успешное получение данных о погоде для города"},
-        404: {"description": "Город не найден"}
+        404: {"description": "Город не найден"},
+        500: {"description": "Сервис погоды недоступен"},
+        400: {"description": "Неверный диапазон времени"}
     }
 )
 def get_weather_in_city_endpoint(
     city_name: str,
     time: datetime,
     weather_query_params: WeatherQueryParams = Depends(),
-    db: Session = Depends(get_db)
+    weather_service: WeatherService = Depends(get_weather_service),
 ):
     """
     Метод принимает название города и время,
     возвращает для него погоду на текущий день в указанное время.
     Возвращаемые параметры погоды определюятся через qurey-параметры.
     """
-    # Проверяем существует ли город в базе данных
-    city = CityValidator.validate_city_exists(city_name, db)
-    # Проверяем что время находится в пределах текущего дня
-    TimeValidator.validate_within_current_day(time)
+    try:
+        weather = weather_service.get_weather_in_city_at_time(city_name, time)
+    except CityNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except OpenMeteoAPIError as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    except TimeRangeError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
-    weather = weather_service.get_weather_closest_to_time_in_city(city, time)
-
-    return weather_service.build_weather_response(weather,
-                                                  weather_query_params)
+    return WeatherResponse.build_response(weather,
+                                          weather_query_params)
