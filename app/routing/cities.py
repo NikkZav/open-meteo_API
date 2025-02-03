@@ -1,10 +1,13 @@
 from http import HTTPStatus
 
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
+from fastapi import APIRouter, Depends, HTTPException
 
-from repositories.db import get_db
-from schemas.city import CityResponse, City
+from depends import get_city_service
+from services.city_service import CityService
+from schemas.city import CityResponse, City, CityParams
+from utils.exceptions import SameCityExistsError
+from services.update_weather_services import \
+    create_periodic_weather_update_task
 
 
 router = APIRouter()
@@ -19,20 +22,20 @@ router = APIRouter()
         409: {"description": "Город уже существует"}
     }
 )
-async def add_city_endpoint(city_data: City,
-                            db: Session = Depends(get_db)):
+async def add_city_endpoint(
+        city: CityParams,
+        city_service: CityService = Depends(get_city_service)):
     """
     Метод принимает название города и его координаты и
     добавляет в список городов для которых отслеживается прогноз погоды
     """
-    # Проверяем существование города
-    CityValidator.validate_city_not_exists(city_data, db)
-
-    # Добавляем новый город в БД
-    new_city = CityService(db, city_data).add_city()
-
-    # Создаем задачу обновления погоды для нового города
-    await create_periodic_weather_update_task(city_id=new_city.id)
+    try:
+        # Добавляем новый город в БД
+        new_city = city_service.add_city(city)
+        # Создаем задачу обновления погоды для нового города
+        create_periodic_weather_update_task(city=new_city)
+    except SameCityExistsError as e:
+        raise HTTPException(status_code=409, detail=str(e))
 
     return {"message": "Город успешно добавлен",
             "id": new_city.id,
@@ -42,11 +45,13 @@ async def add_city_endpoint(city_data: City,
 @router.get(
     "/cities",
     response_model=list[CityResponse | str],
+    response_model_exclude_unset=True,
     responses={
         200: {"description": "Список городов получен"},
     }
 )
 def get_cities(include_weather: bool | None = None,
-               db: Session = Depends(get_db)):
+               city_service: CityService = Depends(get_city_service)):
     """Метод возвращает список городов. Есть опция вывести вместе с погодой"""
-    return CityService(db).get_cities(include_weather)
+    cities: list[City | str] = city_service.get_cities(include_weather)
+    return CityResponse.build_response(cities, include_weather)

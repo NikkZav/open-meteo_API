@@ -1,13 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
 from datetime import datetime
 
-from repositories.db import get_db
 from schemas.coordinates import Coordinates
 from schemas.weather import WeatherQueryParams, WeatherResponse
 from depends import get_weather_service
 from services.weather_service import WeatherService
-from utils.exceptions import (CityNotFoundError, OpenMeteoAPIError, 
+from utils.exceptions import (CityNotFoundError, OpenMeteoAPIError,
                               TimeRangeError)
 
 
@@ -36,7 +34,7 @@ async def get_weather_endpoint(
     try:
         weather = weather_service.get_weather_now(coordinates)
     except OpenMeteoAPIError as e:
-        raise HTTPException(status_code=404, detail=str(e))
+        raise HTTPException(status_code=503, detail=str(e))
     return WeatherResponse.build_response(weather, weather_query_params)
 
 
@@ -47,7 +45,7 @@ async def get_weather_endpoint(
     responses={
         200: {"description": "Успешное получение данных о погоде для города"},
         404: {"description": "Город не найден"},
-        500: {"description": "Сервис погоды недоступен"},
+        503: {"description": "Сервис погоды недоступен"},
         400: {"description": "Неверный диапазон времени"}
     }
 )
@@ -67,9 +65,8 @@ def get_weather_in_city_endpoint(
     except CityNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except OpenMeteoAPIError as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=503, detail=str(e))
     except TimeRangeError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-    return WeatherResponse.build_response(weather,
-                                          weather_query_params)
+    return WeatherResponse.build_response(weather, weather_query_params)

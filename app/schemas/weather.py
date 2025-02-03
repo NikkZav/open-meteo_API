@@ -12,6 +12,10 @@ class Weather(BaseModel):
 
     time: datetime
 
+    model_config = {
+        "from_attributes": True
+    }
+
 
 class WeatherQueryParams(BaseModel):
     temperature_2m: bool = True
@@ -46,7 +50,13 @@ class WeatherResponse(BaseModel):
 
     @staticmethod
     def build_response(weather: Weather,
-                       query_params: WeatherQueryParams) -> "WeatherResponse":
+                       query_params: WeatherQueryParams = WeatherQueryParams(
+                           temperature_2m=True,
+                           wind_speed_10m=True,
+                           pressure_msl=True,
+                           relative_humidity_2m=True,
+                           rain=True
+                       )) -> "WeatherResponse":
         """Формирует ответ на основе запрошенных параметров."""
         weather_dict = weather.model_dump()
         query_params_dict = query_params.model_dump()
