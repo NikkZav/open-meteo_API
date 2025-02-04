@@ -9,6 +9,6 @@ class WeatherRepository:
     def __init__(self, db_session: Session):
         self.db_session = db_session
 
-    def get_weather_records_by_coord(self, coordinates: Coordinates
-                                     ) -> list[Weather]:
-        return get_weather_records_by_open_meteo_api(coordinates)
+    async def get_weather_records_by_coord(self, coordinates: Coordinates
+                                           ) -> list[Weather]:
+        return await get_weather_records_by_open_meteo_api(coordinates)

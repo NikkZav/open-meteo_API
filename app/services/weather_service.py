@@ -15,7 +15,7 @@ class WeatherService:
         self.weather_repo = weather_repository
         self.city_repo = city_repoitory
 
-    def get_weather_now(self, coordinates: Coordinates) -> Weather:
+    async def get_weather_now(self, coordinates: Coordinates) -> Weather:
         """
         Возвращает текущую погоду по координатам.
         Запросом к Open-Meteo API отправляется только тогда, если его нет в БД.
@@ -31,9 +31,10 @@ class WeatherService:
             )
         except (CityNotFoundError, WeatherInCityNotFoundError):
             logger.warning("Weather not found in DB. Fetching from API")
-            weather = self._get_weather_closest_to_time(coordinates,
-                                                        time=datetime.now())
-
+            weather = await self._get_weather_closest_to_time(
+                coordinates,
+                time=datetime.now()
+            )
         return weather
 
     def get_weather_in_city_at_time(self, city_name: str,
@@ -65,10 +66,10 @@ class WeatherService:
         """Возвращает запись о погоде, ближайшую к указанному времени."""
         return min(weather_records, key=lambda record: abs(record.time - time))
 
-    def _get_weather_closest_to_time(self, coordinates: Coordinates,
-                                     time: datetime) -> Weather:
+    async def _get_weather_closest_to_time(self, coordinates: Coordinates,
+                                           time: datetime) -> Weather:
         weather_records = \
-            self.weather_repo.get_weather_records_by_coord(coordinates)
+            await self.weather_repo.get_weather_records_by_coord(coordinates)
         closest_weather = \
             self._search_closest_to_time_weather_record(weather_records, time)
         return closest_weather

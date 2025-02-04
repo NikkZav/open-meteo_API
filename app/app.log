@@ -932,3 +932,186 @@
 2025-02-04 23:19:05,166 - app - INFO - Parsing weather data
 2025-02-04 23:19:05,172 - app - INFO - Weather updated for city 2
 2025-02-04 23:19:05,172 - app - INFO - Closing database session
+2025-02-04 23:42:24,760 - app - INFO - Creating database tables
+2025-02-04 23:42:28,471 - app - INFO - Creating database session
+2025-02-04 23:42:28,473 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:28,474 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:28,474 - app - INFO - Trying to get weather from DB
+2025-02-04 23:42:28,475 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:28,487 - app - ERROR - City not found
+2025-02-04 23:42:28,488 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:42:28,488 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:42:28,488 - app - INFO - Requesting weather by open-meteo API (async)
+2025-02-04 23:42:29,132 - httpx - INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=33.0&longitude=-18.0&minutely_15=temperature_2m%2Cwind_speed_10m%2Cpressure_msl%2Crain%2Crelative_humidity_2m "HTTP/1.1 200 OK"
+2025-02-04 23:42:29,136 - app - INFO - Parsing weather data
+2025-02-04 23:42:29,139 - app - INFO - Building weather response
+2025-02-04 23:42:29,141 - app - INFO - Closing database session
+2025-02-04 23:42:36,982 - app - INFO - Creating database session
+2025-02-04 23:42:36,984 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:36,985 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:36,985 - app - INFO - Trying to get weather from DB
+2025-02-04 23:42:36,986 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:36,989 - app - ERROR - City not found
+2025-02-04 23:42:36,989 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:42:36,990 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:42:36,990 - app - INFO - Requesting weather by open-meteo API (async)
+2025-02-04 23:42:37,440 - httpx - INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=33.0&longitude=-18.0&minutely_15=temperature_2m%2Cwind_speed_10m%2Cpressure_msl%2Crain%2Crelative_humidity_2m "HTTP/1.1 200 OK"
+2025-02-04 23:42:37,443 - app - INFO - Parsing weather data
+2025-02-04 23:42:37,445 - app - INFO - Building weather response
+2025-02-04 23:42:37,445 - app - INFO - Closing database session
+2025-02-04 23:42:38,836 - app - INFO - Creating database session
+2025-02-04 23:42:38,838 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:38,839 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:38,839 - app - INFO - Trying to get weather from DB
+2025-02-04 23:42:38,840 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:38,842 - app - ERROR - City not found
+2025-02-04 23:42:38,842 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:42:38,843 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:42:38,843 - app - INFO - Requesting weather by open-meteo API (async)
+2025-02-04 23:42:39,303 - httpx - INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=33.0&longitude=-18.0&minutely_15=temperature_2m%2Cwind_speed_10m%2Cpressure_msl%2Crain%2Crelative_humidity_2m "HTTP/1.1 200 OK"
+2025-02-04 23:42:39,306 - app - INFO - Parsing weather data
+2025-02-04 23:42:39,308 - app - INFO - Building weather response
+2025-02-04 23:42:39,309 - app - INFO - Closing database session
+2025-02-04 23:42:39,885 - app - INFO - Creating database session
+2025-02-04 23:42:39,887 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:39,888 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:39,888 - app - INFO - Trying to get weather from DB
+2025-02-04 23:42:39,889 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:39,891 - app - ERROR - City not found
+2025-02-04 23:42:39,891 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:42:39,892 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:42:39,893 - app - INFO - Requesting weather by open-meteo API (async)
+2025-02-04 23:42:40,305 - httpx - INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=33.0&longitude=-18.0&minutely_15=temperature_2m%2Cwind_speed_10m%2Cpressure_msl%2Crain%2Crelative_humidity_2m "HTTP/1.1 200 OK"
+2025-02-04 23:42:40,307 - app - INFO - Parsing weather data
+2025-02-04 23:42:40,309 - app - INFO - Building weather response
+2025-02-04 23:42:40,310 - app - INFO - Closing database session
+2025-02-04 23:42:43,101 - app - INFO - Creating database session
+2025-02-04 23:42:43,103 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:43,104 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:43,104 - app - INFO - Trying to get weather from DB
+2025-02-04 23:42:43,105 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:43,107 - app - ERROR - City not found
+2025-02-04 23:42:43,107 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:42:43,108 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:42:43,109 - app - INFO - Requesting weather by open-meteo API (async)
+2025-02-04 23:42:43,561 - httpx - INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=33.0&longitude=-18.0&minutely_15=temperature_2m%2Cwind_speed_10m%2Cpressure_msl%2Crain%2Crelative_humidity_2m "HTTP/1.1 200 OK"
+2025-02-04 23:42:43,564 - app - INFO - Parsing weather data
+2025-02-04 23:42:43,577 - app - INFO - Building weather response
+2025-02-04 23:42:43,578 - app - INFO - Closing database session
+2025-02-04 23:42:43,790 - app - INFO - Creating database session
+2025-02-04 23:42:43,792 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:43,793 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:43,793 - app - INFO - Trying to get weather from DB
+2025-02-04 23:42:43,794 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:43,797 - app - ERROR - City not found
+2025-02-04 23:42:43,797 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:42:43,798 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:42:43,798 - app - INFO - Requesting weather by open-meteo API (async)
+2025-02-04 23:42:44,251 - httpx - INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=33.0&longitude=-18.0&minutely_15=temperature_2m%2Cwind_speed_10m%2Cpressure_msl%2Crain%2Crelative_humidity_2m "HTTP/1.1 200 OK"
+2025-02-04 23:42:44,253 - app - INFO - Parsing weather data
+2025-02-04 23:42:44,255 - app - INFO - Building weather response
+2025-02-04 23:42:44,255 - app - INFO - Closing database session
+2025-02-04 23:42:44,475 - app - INFO - Creating database session
+2025-02-04 23:42:44,476 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:44,477 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:44,477 - app - INFO - Trying to get weather from DB
+2025-02-04 23:42:44,477 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:44,479 - app - ERROR - City not found
+2025-02-04 23:42:44,479 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:42:44,480 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:42:44,480 - app - INFO - Requesting weather by open-meteo API (async)
+2025-02-04 23:42:44,937 - httpx - INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=33.0&longitude=-18.0&minutely_15=temperature_2m%2Cwind_speed_10m%2Cpressure_msl%2Crain%2Crelative_humidity_2m "HTTP/1.1 200 OK"
+2025-02-04 23:42:44,939 - app - INFO - Parsing weather data
+2025-02-04 23:42:44,941 - app - INFO - Building weather response
+2025-02-04 23:42:44,942 - app - INFO - Closing database session
+2025-02-04 23:42:45,177 - app - INFO - Creating database session
+2025-02-04 23:42:45,178 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:45,179 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:45,179 - app - INFO - Trying to get weather from DB
+2025-02-04 23:42:45,179 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:45,182 - app - ERROR - City not found
+2025-02-04 23:42:45,182 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:42:45,183 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:42:45,183 - app - INFO - Requesting weather by open-meteo API (async)
+2025-02-04 23:42:45,627 - httpx - INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=33.0&longitude=-18.0&minutely_15=temperature_2m%2Cwind_speed_10m%2Cpressure_msl%2Crain%2Crelative_humidity_2m "HTTP/1.1 200 OK"
+2025-02-04 23:42:45,629 - app - INFO - Parsing weather data
+2025-02-04 23:42:45,631 - app - INFO - Building weather response
+2025-02-04 23:42:45,633 - app - INFO - Closing database session
+2025-02-04 23:42:48,390 - app - INFO - Creating database session
+2025-02-04 23:42:48,392 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:48,393 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:48,393 - app - INFO - Trying to get weather from DB
+2025-02-04 23:42:48,394 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:48,396 - app - ERROR - City not found
+2025-02-04 23:42:48,397 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:42:48,398 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:42:48,398 - app - INFO - Requesting weather by open-meteo API (async)
+2025-02-04 23:42:48,867 - httpx - INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=33.0&longitude=-18.0&minutely_15=temperature_2m%2Cwind_speed_10m%2Cpressure_msl%2Crain%2Crelative_humidity_2m "HTTP/1.1 200 OK"
+2025-02-04 23:42:48,870 - app - INFO - Parsing weather data
+2025-02-04 23:42:48,873 - app - INFO - Building weather response
+2025-02-04 23:42:48,873 - app - INFO - Closing database session
+2025-02-04 23:42:49,092 - app - INFO - Creating database session
+2025-02-04 23:42:49,093 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:49,094 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:49,095 - app - INFO - Trying to get weather from DB
+2025-02-04 23:42:49,095 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:49,097 - app - ERROR - City not found
+2025-02-04 23:42:49,097 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:42:49,098 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:42:49,098 - app - INFO - Requesting weather by open-meteo API (async)
+2025-02-04 23:42:49,531 - httpx - INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=33.0&longitude=-18.0&minutely_15=temperature_2m%2Cwind_speed_10m%2Cpressure_msl%2Crain%2Crelative_humidity_2m "HTTP/1.1 200 OK"
+2025-02-04 23:42:49,534 - app - INFO - Parsing weather data
+2025-02-04 23:42:49,537 - app - INFO - Building weather response
+2025-02-04 23:42:49,538 - app - INFO - Closing database session
+2025-02-04 23:42:51,043 - app - INFO - Creating database session
+2025-02-04 23:42:51,044 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:51,045 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:51,045 - app - INFO - Trying to get weather from DB
+2025-02-04 23:42:51,046 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:51,048 - app - ERROR - City not found
+2025-02-04 23:42:51,048 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:42:51,049 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:42:51,049 - app - INFO - Requesting weather by open-meteo API (async)
+2025-02-04 23:42:51,542 - httpx - INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=33.0&longitude=-18.0&minutely_15=temperature_2m%2Cwind_speed_10m%2Cpressure_msl%2Crain%2Crelative_humidity_2m "HTTP/1.1 200 OK"
+2025-02-04 23:42:51,544 - app - INFO - Parsing weather data
+2025-02-04 23:42:51,545 - app - INFO - Building weather response
+2025-02-04 23:42:51,546 - app - INFO - Closing database session
+2025-02-04 23:42:51,751 - app - INFO - Creating database session
+2025-02-04 23:42:51,752 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:51,752 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:51,753 - app - INFO - Trying to get weather from DB
+2025-02-04 23:42:51,757 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:51,759 - app - ERROR - City not found
+2025-02-04 23:42:51,761 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:42:51,762 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:42:51,762 - app - INFO - Requesting weather by open-meteo API (async)
+2025-02-04 23:42:52,159 - httpx - INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=33.0&longitude=-18.0&minutely_15=temperature_2m%2Cwind_speed_10m%2Cpressure_msl%2Crain%2Crelative_humidity_2m "HTTP/1.1 200 OK"
+2025-02-04 23:42:52,162 - app - INFO - Parsing weather data
+2025-02-04 23:42:52,165 - app - INFO - Building weather response
+2025-02-04 23:42:52,166 - app - INFO - Closing database session
+2025-02-04 23:42:52,438 - app - INFO - Creating database session
+2025-02-04 23:42:52,439 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:52,440 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:52,442 - app - INFO - Trying to get weather from DB
+2025-02-04 23:42:52,442 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:52,443 - app - ERROR - City not found
+2025-02-04 23:42:52,444 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:42:52,444 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:42:52,445 - app - INFO - Requesting weather by open-meteo API (async)
+2025-02-04 23:42:52,885 - httpx - INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=33.0&longitude=-18.0&minutely_15=temperature_2m%2Cwind_speed_10m%2Cpressure_msl%2Crain%2Crelative_humidity_2m "HTTP/1.1 200 OK"
+2025-02-04 23:42:52,888 - app - INFO - Parsing weather data
+2025-02-04 23:42:52,891 - app - INFO - Building weather response
+2025-02-04 23:42:52,892 - app - INFO - Closing database session
+2025-02-04 23:42:53,146 - app - INFO - Creating database session
+2025-02-04 23:42:53,147 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:53,148 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:53,148 - app - INFO - Trying to get weather from DB
+2025-02-04 23:42:53,149 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:42:53,151 - app - ERROR - City not found
+2025-02-04 23:42:53,151 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:42:53,151 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:42:53,151 - app - INFO - Requesting weather by open-meteo API (async)
+2025-02-04 23:42:53,609 - httpx - INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=33.0&longitude=-18.0&minutely_15=temperature_2m%2Cwind_speed_10m%2Cpressure_msl%2Crain%2Crelative_humidity_2m "HTTP/1.1 200 OK"
+2025-02-04 23:42:53,611 - app - INFO - Parsing weather data
+2025-02-04 23:42:53,613 - app - INFO - Building weather response
+2025-02-04 23:42:53,614 - app - INFO - Closing database session

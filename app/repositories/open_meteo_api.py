@@ -1,7 +1,7 @@
 from datetime import datetime, time
 from http import HTTPStatus
 
-import requests
+import httpx
 
 from schemas.coordinates import Coordinates
 from schemas.weather import Weather
@@ -38,22 +38,26 @@ def parse_weather(json_data: dict) -> list[Weather]:
     ]
 
 
-def get_weather_records_by_open_meteo_api(coordinates: Coordinates
+async def get_weather_records_by_open_meteo_api(coordinates: Coordinates
                                           ) -> list[Weather]:
-    """Возвращает прогноз погоды по координатам на текущий день."""
-    logger.info("Requesting weather by open-meteo API")
+    """Асинхронный запрос к Open-Meteo API"""
+    logger.info("Requesting weather by open-meteo API (async)")
     url_params = {
         "latitude": coordinates.latitude,
         "longitude": coordinates.longitude,
         "minutely_15": WEATHER_PARAMS,
     }
 
-    response = requests.get(URL, params=url_params)
-    if response.status_code != HTTPStatus.OK:
-        raise OpenMeteoAPIError(
-            f"Ошибка запроса: {response.status_code}\n"
-            f"Детали: {response.text}"
-        )
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.get(URL, params=url_params)
+    except httpx.HTTPStatusError as e:
+        logger.error(f"Open-Meteo API error: {e.response.status_code}")
+        raise OpenMeteoAPIError(f"HTTP error {e.response.status_code}: "
+                                f"{e.response.text}")
+    except httpx.RequestError as e:
+        logger.error(f"Open-Meteo connection error: {str(e)}")
+        raise OpenMeteoAPIError("Connection to weather service failed")
 
     json_data = response.json()
     weather_records = parse_weather(json_data)

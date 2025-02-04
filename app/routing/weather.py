@@ -34,7 +34,7 @@ async def get_weather_endpoint(
     """
     logger.info(f"Requesting weather for coordinates {coordinates}")
     try:
-        weather = weather_service.get_weather_now(coordinates)
+        weather = await weather_service.get_weather_now(coordinates)
     except OpenMeteoAPIError as e:
         raise HTTPException(status_code=503, detail=str(e))
     return WeatherResponse.build_response(weather, weather_query_params)
