@@ -1,12 +1,24 @@
 import asyncio
+
+from requests import Session
 from schemas.city import City
-from repositories.db import get_db_session
+from repositories.db import get_db_context, transaction
 from repositories.city_repository import CityRepository
 from repositories.weather_repository import WeatherRepository
 from utils.exceptions import CityNotFoundError, OpenMeteoAPIError
+from sqlalchemy.orm import Session
 
 
 tasks: dict[int, asyncio.Task] = {}
+
+
+def weather_update(city: City, db: Session) -> None:
+    weather_repo = WeatherRepository(db)
+    city_repo = CityRepository(db)
+
+    new_weather_records = weather_repo.get_weather_records_by_coord(
+        city.coordinates)
+    city_repo.update_weather_records(city.id, new_weather_records)
 
 
 async def periodic_weather_update(city: City) -> None:
@@ -17,19 +29,14 @@ async def periodic_weather_update(city: City) -> None:
         await asyncio.sleep(15)  # 15 минут (для тестирования 15сек)
         print(f"Обновляем погоду для города ID {city.id}")
 
-        with get_db_session() as db:
-            # Получаем репозитории
-            weather_repo = WeatherRepository(db)
-            city_repo = CityRepository(db)
+        with get_db_context() as db, transaction(db):
             try:
-                new_weather_records = \
-                    weather_repo.get_weather_records_by_coord(city.coordinates)
-                city_repo.update_weather_records(city.id, new_weather_records)
+                weather_update(city, db)
             except OpenMeteoAPIError:
                 print("Ошибка при получении погоды ")
             except CityNotFoundError:
                 print(f"Город с ID {city.id} не найден")
-                break  # Завершаем цикл, если город удалён
+                break  # Завершаем задачу, если город не найден
             except Exception as e:
                 print(f"Ошибка: {e}")
 

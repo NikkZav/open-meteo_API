@@ -3,9 +3,11 @@ from schemas.coordinates import Coordinates
 from schemas.city import City
 from schemas.weather import Weather
 from sqlalchemy import and_
+from sqlalchemy.sql import Select
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy.future import select
 from utils.exceptions import CityNotFoundError
+from .db import transaction
 
 
 class CityRepository:
@@ -14,39 +16,51 @@ class CityRepository:
         self.db_session = db_session
 
     def get_city_by_id(self, city_id: int) -> City:
-        city_orm = self._get_city_orm_by_id(city_id)
+        try:
+            city_orm = self._get_city_orm(CityORM.id == city_id)
+        except CityNotFoundError:
+            raise CityNotFoundError(f"City with id {city_id} not found")
         return self._convert_orm_to_city(city_orm)
 
     def get_city_by_name(self, city_name: str) -> City:
-        city_orm = self._get_city_orm_by_name(city_name)
+        try:
+            city_orm = self._get_city_orm(CityORM.name == city_name)
+        except CityNotFoundError:
+            raise CityNotFoundError(f"City with name {city_name} not found")
         return self._convert_orm_to_city(city_orm)
 
     def get_city_by_coord(self, coordinates: Coordinates) -> City:
-        city_orm = self._get_city_orm_by_coordinates(coordinates)
+        try:
+            city_orm = self._get_city_orm(
+                and_(
+                    CityORM.latitude == coordinates.latitude,
+                    CityORM.longitude == coordinates.longitude
+                )
+            )
+        except CityNotFoundError:
+            raise CityNotFoundError(f"City with coordinates {coordinates}"
+                                    f" not found")
         return self._convert_orm_to_city(city_orm)
 
     def get_cities(self) -> list[City]:
-        return [
-            self._convert_orm_to_city(city_orm) for city_orm in
-            self.db_session.query(CityORM).options(
-                joinedload(CityORM.weather_records)
-            ).all()
-        ]
+        result = self.db_session.execute(self._get_select_cities_query())
+        cities_orm = result.unique().scalars().all()
+        return [self._convert_orm_to_city(city_orm) for city_orm in cities_orm]
 
     def get_city_names(self) -> list[str]:
         result = self.db_session.execute(select(CityORM.name))
         return list(result.scalars())
 
     def save_city(self, city: City) -> City:
-        city_orm = CityORM(
-            name=city.name,
-            latitude=city.coordinates.latitude,
-            longitude=city.coordinates.longitude,
-            weather_records=[WeatherORM(**weather.model_dump())
-                             for weather in (city.weather_records or [])]
-        )
-        self.db_session.add(city_orm)
-        self.db_session.commit()
+        with transaction(self.db_session):
+            city_orm = CityORM(
+                name=city.name,
+                latitude=city.coordinates.latitude,
+                longitude=city.coordinates.longitude,
+                weather_records=[WeatherORM(**weather.model_dump())
+                                 for weather in (city.weather_records or [])]
+            )
+            self.db_session.add(city_orm)
 
         return self._convert_orm_to_city(city_orm)
 
@@ -56,17 +70,16 @@ class CityRepository:
         Обновляет погодные записи для города с заданным ID.
         Имеющиеся записи обновляются, а тех, которых нет - добавляются.
         """
-        city_orm = self._get_city_orm_by_id(city_id)
+        city_orm = self._get_city_orm(CityORM.id == city_id)
         existing_records = {record.time: record for record
                             in city_orm.weather_records}
-
-        for weather in new_weather_records:
-            if weather.time in existing_records:
-                self._update_record(weather, existing_records[weather.time])
-            else:
-                self._add_record(weather, city_id)
-
-        self.db_session.commit()
+        with transaction(self.db_session):
+            for weather in new_weather_records:
+                if weather.time in existing_records:
+                    self._update_record(weather,
+                                        existing_records[weather.time])
+                else:
+                    self._add_record(weather, city_id)
 
     def _update_record(self, new_weather: Weather,
                        existing_record: WeatherORM) -> None:
@@ -85,33 +98,18 @@ class CityRepository:
                                 city_id=city_id)
         self.db_session.add(new_record)
 
-    def _get_city_orm_by_id(self, city_id: int) -> CityORM:
-        city_orm = self.db_session.query(CityORM).options(
-            joinedload(CityORM.weather_records)
-        ).filter(CityORM.id == city_id).first()
-        if city_orm is None:
-            raise CityNotFoundError(f"City by ID {city_id} not found")
-        return city_orm
+    @staticmethod
+    def _get_select_cities_query() -> Select[CityORM]:
+        """Возвращает базовый запрос для CityORM
+        с предзагрузкой weather_records."""
+        return select(CityORM).options(joinedload(CityORM.weather_records))
 
-    def _get_city_orm_by_name(self, city_name: str) -> CityORM:
-        city_orm = self.db_session.query(CityORM).options(
-            joinedload(CityORM.weather_records)
-        ).filter(CityORM.name == city_name).first()
+    def _get_city_orm(self, *where_clauses) -> CityORM:
+        query = self._get_select_cities_query().where(*where_clauses)
+        result = self.db_session.execute(query)
+        city_orm = result.scalars().first()
         if city_orm is None:
-            raise CityNotFoundError(f"City {city_name} not found")
-        return city_orm
-
-    def _get_city_orm_by_coordinates(self,
-                                     coordinates: Coordinates) -> CityORM:
-        city_orm = self.db_session.query(CityORM).options(
-            joinedload(CityORM.weather_records)
-        ).filter(and_(
-            CityORM.latitude == coordinates.latitude,
-            CityORM.longitude == coordinates.longitude
-        )).first()
-        if city_orm is None:
-            raise CityNotFoundError(
-                f"City by coordinates {Coordinates} not found")
+            raise CityNotFoundError("City not found")
         return city_orm
 
     def _convert_orm_to_city(self, city_orm: CityORM) -> City:

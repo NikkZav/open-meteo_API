@@ -2,7 +2,7 @@ from contextlib import contextmanager
 
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, Session
 
 DATABASE_URL = "sqlite:///./weather.db"
 
@@ -17,18 +17,29 @@ def create_tables():
 
 
 def get_db():
-    """Используется в качестве FastAPI dependency."""
+    """Создаёт и управляет сессией базы данных."""
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
 
+
 @contextmanager
-def get_db_session():
+def get_db_context():
     """Используется в синхронном контексте (например, в фоновых задачах)."""
-    db = SessionLocal()
+    yield from get_db()
+
+
+@contextmanager
+def transaction(session: Session):
+    """Контекстный менеджер для транзакций.
+    После выхода из блока yield выполняется commit,
+    а в случае возникновения исключения — rollback.
+    """
     try:
-        yield db
-    finally:
-        db.close()
+        yield
+        session.commit()
+    except Exception as e:
+        session.rollback()
+        raise e
