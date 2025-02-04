@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from pydantic import BaseModel
+from utils.log import logger
 
 
 class Weather(BaseModel):
@@ -58,6 +59,7 @@ class WeatherResponse(BaseModel):
                            rain=True
                        )) -> "WeatherResponse":
         """Формирует ответ на основе запрошенных параметров."""
+        logger.info("Building weather response")
         weather_dict = weather.model_dump()
         query_params_dict = query_params.model_dump()
 

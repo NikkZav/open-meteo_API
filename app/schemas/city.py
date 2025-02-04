@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from .coordinates import Coordinates
 from .weather import Weather, WeatherResponse
 from utils.exceptions import WeatherInCityNotFoundError
+from utils.log import logger
 
 
 class City(BaseModel):
@@ -37,6 +38,8 @@ class CityResponse(BaseModel):
     def build_response(cls, cities: list[City | str],
                        include_weather: bool | None = False
                        ) -> "list[CityResponse | str]":
+        """Конвертация списка городов в список CityResponse"""
+        logger.info("Building response for a list of cities")
         if include_weather:
             return [cls.convert_city_to_response(city) for city in cities
                     if isinstance(city, City)]

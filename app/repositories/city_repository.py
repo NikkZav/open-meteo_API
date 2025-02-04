@@ -7,6 +7,7 @@ from sqlalchemy.sql import Select
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy.future import select
 from utils.exceptions import CityNotFoundError
+from utils.log import logger
 from .db import transaction
 
 
@@ -16,6 +17,7 @@ class CityRepository:
         self.db_session = db_session
 
     def get_city_by_id(self, city_id: int) -> City:
+        logger.info(f"Getting city by id {city_id}")
         try:
             city_orm = self._get_city_orm(CityORM.id == city_id)
         except CityNotFoundError:
@@ -23,6 +25,7 @@ class CityRepository:
         return self._convert_orm_to_city(city_orm)
 
     def get_city_by_name(self, city_name: str) -> City:
+        logger.info(f"Getting city by name {city_name}")
         try:
             city_orm = self._get_city_orm(CityORM.name == city_name)
         except CityNotFoundError:
@@ -30,6 +33,7 @@ class CityRepository:
         return self._convert_orm_to_city(city_orm)
 
     def get_city_by_coord(self, coordinates: Coordinates) -> City:
+        logger.info(f"Getting city by coordinates {coordinates}")
         try:
             city_orm = self._get_city_orm(
                 and_(
@@ -43,15 +47,18 @@ class CityRepository:
         return self._convert_orm_to_city(city_orm)
 
     def get_cities(self) -> list[City]:
+        logger.info("Getting all cities")
         result = self.db_session.execute(self._get_select_cities_query())
         cities_orm = result.unique().scalars().all()
         return [self._convert_orm_to_city(city_orm) for city_orm in cities_orm]
 
     def get_city_names(self) -> list[str]:
+        logger.info("Getting all city names")
         result = self.db_session.execute(select(CityORM.name))
         return list(result.scalars())
 
     def save_city(self, city: City) -> City:
+        logger.info(f"Saving city {city.name}")
         with transaction(self.db_session):
             city_orm = CityORM(
                 name=city.name,
@@ -83,6 +90,9 @@ class CityRepository:
 
     def _update_record(self, new_weather: Weather,
                        existing_record: WeatherORM) -> None:
+        logger.debug(f"Updating weather record for city ID "
+                     f"{existing_record.city_id} at time "
+                     f"{existing_record.time}")
         # Сравниваем только те поля, которые могут изменяться
         updated_data = {key: value for key, value in
                         new_weather.model_dump().items()
@@ -94,6 +104,8 @@ class CityRepository:
                 setattr(existing_record, key, value)
 
     def _add_record(self, new_weather: Weather, city_id: int) -> None:
+        logger.debug(f"Adding new weather record for city ID {city_id} "
+                     f"at time {new_weather.time}")
         new_record = WeatherORM(**new_weather.model_dump(),
                                 city_id=city_id)
         self.db_session.add(new_record)

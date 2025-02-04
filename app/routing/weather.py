@@ -7,6 +7,7 @@ from depends import get_weather_service
 from services.weather_service import WeatherService
 from utils.exceptions import (CityNotFoundError, OpenMeteoAPIError,
                               TimeRangeError)
+from utils.log import logger
 
 
 router = APIRouter()
@@ -31,6 +32,7 @@ async def get_weather_endpoint(
     Метод принимает координаты и возвращает погоду в текущее время.
     Возвращаемые параметры погоды определюятся через qurey-параметры.
     """
+    logger.info(f"Requesting weather for coordinates {coordinates}")
     try:
         weather = weather_service.get_weather_now(coordinates)
     except OpenMeteoAPIError as e:
@@ -60,6 +62,7 @@ def get_weather_in_city_endpoint(
     возвращает для него погоду на текущий день в указанное время.
     Возвращаемые параметры погоды определюятся через qurey-параметры.
     """
+    logger.info(f"Requesting weather for city '{city_name}' at time {time}")
     try:
         weather = weather_service.get_weather_in_city_at_time(city_name, time)
     except CityNotFoundError as e:

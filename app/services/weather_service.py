@@ -5,6 +5,7 @@ from schemas.coordinates import Coordinates
 from datetime import datetime, date
 from utils.exceptions import (TimeRangeError, CityNotFoundError,
                               WeatherInCityNotFoundError)
+from utils.log import logger
 
 
 class WeatherService:
@@ -19,7 +20,9 @@ class WeatherService:
         Возвращает текущую погоду по координатам.
         Запросом к Open-Meteo API отправляется только тогда, если его нет в БД.
         """
+        logger.info(f"Getting current weather for coordinates {coordinates}")
         try:  # В начале пытаемся получить погоду из БД
+            logger.info("Trying to get weather from DB")
             city = self.city_repo.get_city_by_coord(coordinates)
             weather_records = city.get_weather_records()
             weather = self._search_closest_to_time_weather_record(
@@ -27,6 +30,7 @@ class WeatherService:
                 time=datetime.now()
             )
         except (CityNotFoundError, WeatherInCityNotFoundError):
+            logger.warning("Weather not found in DB. Fetching from API")
             weather = self._get_weather_closest_to_time(coordinates,
                                                         time=datetime.now())
 
@@ -44,11 +48,14 @@ class WeatherService:
         city = self.city_repo.get_city_by_name(city_name)
 
         try:  # В начале пытаемся получить погоду из БД
+            logger.info("Trying to get weather from DB")
             weather_records = city.get_weather_records()
             weather = self._search_closest_to_time_weather_record(
                 weather_records, time
             )
+            logger.info("Weather found in DB")
         except WeatherInCityNotFoundError:  # Если в БД нет, то запрос к API
+            logger.info("Getting weather from API")
             weather = self._get_weather_closest_to_time(city.coordinates, time)
         return weather
 

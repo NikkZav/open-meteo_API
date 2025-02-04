@@ -7,12 +7,14 @@ from repositories.city_repository import CityRepository
 from repositories.weather_repository import WeatherRepository
 from utils.exceptions import CityNotFoundError, OpenMeteoAPIError
 from sqlalchemy.orm import Session
+from utils.log import logger
 
 
 tasks: dict[int, asyncio.Task] = {}
 
 
 def weather_update(city: City, db: Session) -> None:
+    logger.info(f"Weather update started for city {city.id}")
     weather_repo = WeatherRepository(db)
     city_repo = CityRepository(db)
 
@@ -25,28 +27,31 @@ async def periodic_weather_update(city: City) -> None:
     """
     Фоновое обновление погоды для города каждые 15 минут.
     """
+    logger.info(f"Starting periodic weather update for city {city.id}")
     while True:
         await asyncio.sleep(15)  # 15 минут (для тестирования 15сек)
-        print(f"Обновляем погоду для города ID {city.id}")
 
         with get_db_context() as db, transaction(db):
             try:
                 weather_update(city, db)
-            except OpenMeteoAPIError:
-                print("Ошибка при получении погоды ")
+                logger.info(f"Weather updated for city {city.id}")
+            except OpenMeteoAPIError as e:
+                logger.warning(f"OpenMeteo error for city {city.id}: {str(e)}")
             except CityNotFoundError:
-                print(f"Город с ID {city.id} не найден")
+                logger.error(f"City {city.id} not found. Stopping updates.")
                 break  # Завершаем задачу, если город не найден
             except Exception as e:
-                print(f"Ошибка: {e}")
+                logger.error(f"Unexpected error for city {city.id}: {str(e)}")
 
     tasks.pop(city.id, None)
+    logger.info(f"Stopped periodic updates for city {city.id}")
 
 
 def create_periodic_weather_update_task(city: City) -> None:
     """Создание задачи для периодического обновления погоды для города."""
+    logger.info(f"Creating periodic weather update task for city ID {city.id}")
     if city.id in tasks:
-        print(f"Задача для города ID {city.id} уже существует.")
+        logger.info(f"Task for city ID {city.id} already exists.")
         return
     task = asyncio.create_task(periodic_weather_update(city))
     tasks[city.id] = task

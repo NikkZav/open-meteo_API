@@ -1,0 +1,934 @@
+2025-02-04 21:53:02,663 - app - INFO - Creating database tables
+2025-02-04 21:53:02,736 - uvicorn.error - INFO - Will watch for changes in these directories: ['E:\\ЛЭТИ + Обучение\\Тестовые задания\\open-meteo_API\\app']
+2025-02-04 21:53:02,738 - uvicorn.error - INFO - Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2025-02-04 21:53:02,740 - uvicorn.error - INFO - Started reloader process [245196] using WatchFiles
+2025-02-04 21:53:04,685 - app - INFO - Creating database tables
+2025-02-04 21:53:04,699 - uvicorn.error - INFO - Started server process [223624]
+2025-02-04 21:53:04,704 - uvicorn.error - INFO - Waiting for application startup.
+2025-02-04 21:53:04,706 - uvicorn.error - INFO - Application startup complete.
+2025-02-04 21:54:07,775 - app - INFO - Creating database session
+2025-02-04 21:54:07,778 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 21:54:07,779 - app - INFO - Trying to get weather from DB
+2025-02-04 21:54:07,779 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 21:54:07,795 - app - ERROR - City not found
+2025-02-04 21:54:07,796 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 21:54:07,797 - app - INFO - Getting weather from API
+2025-02-04 21:54:07,797 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 21:54:08,189 - app - INFO - Parsing weather data
+2025-02-04 21:54:08,191 - app - INFO - Building weather response
+2025-02-04 21:54:08,193 - app - INFO - Closing database session
+2025-02-04 21:54:51,923 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:51,926 - uvicorn.error - WARNING - WatchFiles detected changes in 'repositories\db.py'. Reloading...
+2025-02-04 21:54:51,955 - uvicorn.error - INFO - Shutting down
+2025-02-04 21:54:52,064 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-02-04 21:54:52,066 - uvicorn.error - INFO - Application shutdown complete.
+2025-02-04 21:54:52,068 - uvicorn.error - INFO - Finished server process [223624]
+2025-02-04 21:54:52,699 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:53,313 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:53,673 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:54,035 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:54,396 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:54,648 - app - INFO - Creating database tables
+2025-02-04 21:54:54,663 - uvicorn.error - INFO - Started server process [245740]
+2025-02-04 21:54:54,669 - uvicorn.error - INFO - Waiting for application startup.
+2025-02-04 21:54:54,671 - uvicorn.error - INFO - Application startup complete.
+2025-02-04 21:54:54,757 - watchfiles.main - INFO - 6 changes detected
+2025-02-04 21:54:55,119 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:55,479 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:55,479 - uvicorn.error - WARNING - WatchFiles detected changes in 'repositories\db.py'. Reloading...
+2025-02-04 21:54:55,552 - uvicorn.error - INFO - Shutting down
+2025-02-04 21:54:55,662 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-02-04 21:54:55,665 - uvicorn.error - INFO - Application shutdown complete.
+2025-02-04 21:54:55,666 - uvicorn.error - INFO - Finished server process [245740]
+2025-02-04 21:54:56,249 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:56,863 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:57,224 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:57,584 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:57,944 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:58,214 - app - INFO - Creating database tables
+2025-02-04 21:54:58,229 - uvicorn.error - INFO - Started server process [241852]
+2025-02-04 21:54:58,235 - uvicorn.error - INFO - Waiting for application startup.
+2025-02-04 21:54:58,237 - uvicorn.error - INFO - Application startup complete.
+2025-02-04 21:54:58,305 - watchfiles.main - INFO - 6 changes detected
+2025-02-04 21:54:58,665 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:59,025 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:59,386 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:54:59,749 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:00,109 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:00,468 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:00,830 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:01,191 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:01,553 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:01,913 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:02,272 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:02,634 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:02,996 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:03,356 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:03,717 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:04,079 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:04,441 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:04,802 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:05,161 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:05,524 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:05,882 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:06,241 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:06,603 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:06,964 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:07,325 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:07,686 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:08,046 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:08,407 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:08,768 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:09,126 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:09,489 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:09,852 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:10,211 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:10,575 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:10,936 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:11,297 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:11,659 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:12,021 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:12,380 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:12,738 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:13,098 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:13,461 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:13,824 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:14,183 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:14,546 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:14,907 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:15,269 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:15,630 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:15,993 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:16,354 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:16,714 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:17,077 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:17,437 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:17,798 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:18,156 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:18,517 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:18,875 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:19,236 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:19,597 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:19,959 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:20,321 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:20,678 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:21,038 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:21,399 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:21,760 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:22,120 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:22,482 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:22,839 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:23,199 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:23,558 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:23,917 - watchfiles.main - INFO - 2 changes detected
+2025-02-04 21:55:23,917 - uvicorn.error - WARNING - WatchFiles detected changes in 'repositories\db.py'. Reloading...
+2025-02-04 21:55:24,035 - uvicorn.error - INFO - Shutting down
+2025-02-04 21:55:24,144 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-02-04 21:55:24,146 - uvicorn.error - INFO - Application shutdown complete.
+2025-02-04 21:55:24,147 - uvicorn.error - INFO - Finished server process [241852]
+2025-02-04 21:55:24,762 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:25,377 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:25,739 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:26,100 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:26,413 - app - INFO - Creating database tables
+2025-02-04 21:55:26,430 - uvicorn.error - INFO - Started server process [15212]
+2025-02-04 21:55:26,435 - uvicorn.error - INFO - Waiting for application startup.
+2025-02-04 21:55:26,437 - uvicorn.error - INFO - Application startup complete.
+2025-02-04 21:55:26,463 - watchfiles.main - INFO - 6 changes detected
+2025-02-04 21:55:26,975 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:27,328 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:27,686 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:28,047 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:28,408 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:28,770 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:29,132 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:29,494 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:29,852 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:30,215 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:30,576 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:30,938 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:31,301 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:31,662 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:32,023 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:32,385 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:32,747 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:33,109 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:33,474 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:33,835 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:34,197 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:34,559 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:34,920 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:35,279 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:35,641 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:36,001 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:36,360 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:36,719 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:37,078 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:37,436 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:37,797 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:38,155 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:38,517 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:38,880 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:39,243 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:39,604 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:39,966 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:40,326 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:40,684 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:41,046 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:41,407 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:41,768 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:42,129 - watchfiles.main - INFO - 1 change detected
+2025-02-04 21:55:42,374 - uvicorn.error - INFO - Shutting down
+2025-02-04 21:55:42,483 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-02-04 21:55:42,486 - uvicorn.error - INFO - Application shutdown complete.
+2025-02-04 21:55:42,490 - uvicorn.error - INFO - Finished server process [15212]
+2025-02-04 21:55:42,713 - uvicorn.error - INFO - Stopping reloader process [245196]
+2025-02-04 21:55:52,347 - app - INFO - Creating database tables
+2025-02-04 21:55:59,003 - app - INFO - Creating database session
+2025-02-04 21:55:59,005 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 21:55:59,005 - app - INFO - Trying to get weather from DB
+2025-02-04 21:55:59,006 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 21:55:59,025 - app - ERROR - City not found
+2025-02-04 21:55:59,027 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 21:55:59,027 - app - INFO - Getting weather from API
+2025-02-04 21:55:59,028 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 21:55:59,241 - app - INFO - Parsing weather data
+2025-02-04 21:55:59,244 - app - INFO - Building weather response
+2025-02-04 21:55:59,245 - app - INFO - Closing database session
+2025-02-04 21:58:14,968 - app - INFO - Creating database session
+2025-02-04 21:58:14,970 - app - INFO - A request for a list of cities was received
+2025-02-04 21:58:14,970 - app - INFO - Getting all city names
+2025-02-04 21:58:14,971 - app - INFO - Building response for a list of cities
+2025-02-04 21:58:14,973 - app - INFO - Closing database session
+2025-02-04 21:58:54,500 - app - INFO - Creating database session
+2025-02-04 21:58:54,502 - app - INFO - A request for a list of cities was received
+2025-02-04 21:58:54,502 - app - INFO - Getting all cities
+2025-02-04 21:58:54,507 - app - INFO - Building response for a list of cities
+2025-02-04 21:58:54,508 - app - INFO - Closing database session
+2025-02-04 21:59:19,740 - app - INFO - Creating database session
+2025-02-04 21:59:19,743 - app - INFO - Received a request to add a city Moscow
+2025-02-04 21:59:19,744 - app - INFO - Checking unique city name and coordinates
+2025-02-04 21:59:19,745 - app - INFO - Getting city by name Moscow
+2025-02-04 21:59:19,749 - app - ERROR - City not found
+2025-02-04 21:59:19,749 - app - ERROR - City with name Moscow not found
+2025-02-04 21:59:19,750 - app - INFO - Getting city by coordinates latitude=33.0 longitude=33.0
+2025-02-04 21:59:19,754 - app - ERROR - City not found
+2025-02-04 21:59:19,754 - app - ERROR - City with coordinates latitude=33.0 longitude=33.0 not found
+2025-02-04 21:59:19,755 - app - INFO - Creating city with weather
+2025-02-04 21:59:19,756 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 21:59:20,030 - app - INFO - Parsing weather data
+2025-02-04 21:59:20,033 - app - INFO - Saving city Moscow
+2025-02-04 21:59:20,063 - app - INFO - Transaction committed successfully
+2025-02-04 21:59:20,072 - app - INFO - Creating periodic weather update task for city ID 1
+2025-02-04 21:59:20,074 - app - INFO - Launched periodic weather update for city ID 1
+2025-02-04 21:59:20,074 - app - INFO - Closing database session
+2025-02-04 21:59:35,087 - app - INFO - Creating database session
+2025-02-04 21:59:35,088 - app - INFO - Updating weather for city ID 1
+2025-02-04 21:59:35,088 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 21:59:35,280 - app - INFO - Parsing weather data
+2025-02-04 21:59:35,286 - app - INFO - Transaction committed successfully
+2025-02-04 21:59:35,287 - app - INFO - Transaction committed successfully
+2025-02-04 21:59:35,288 - app - INFO - Closing database session
+2025-02-04 21:59:50,303 - app - INFO - Creating database session
+2025-02-04 21:59:50,304 - app - INFO - Updating weather for city ID 1
+2025-02-04 21:59:50,304 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 21:59:50,493 - app - INFO - Parsing weather data
+2025-02-04 21:59:50,501 - app - INFO - Transaction committed successfully
+2025-02-04 21:59:50,502 - app - INFO - Transaction committed successfully
+2025-02-04 21:59:50,502 - app - INFO - Closing database session
+2025-02-04 22:00:05,524 - app - INFO - Creating database session
+2025-02-04 22:00:05,524 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:00:05,525 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:00:05,721 - app - INFO - Parsing weather data
+2025-02-04 22:00:05,727 - app - INFO - Transaction committed successfully
+2025-02-04 22:00:05,728 - app - INFO - Transaction committed successfully
+2025-02-04 22:00:05,729 - app - INFO - Closing database session
+2025-02-04 22:00:20,737 - app - INFO - Creating database session
+2025-02-04 22:00:20,738 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:00:20,738 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:00:20,932 - app - INFO - Parsing weather data
+2025-02-04 22:00:20,938 - app - INFO - Transaction committed successfully
+2025-02-04 22:00:20,938 - app - INFO - Transaction committed successfully
+2025-02-04 22:00:20,939 - app - INFO - Closing database session
+2025-02-04 22:00:35,946 - app - INFO - Creating database session
+2025-02-04 22:00:35,946 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:00:35,947 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:00:36,141 - app - INFO - Parsing weather data
+2025-02-04 22:00:36,146 - app - INFO - Transaction committed successfully
+2025-02-04 22:00:36,147 - app - INFO - Transaction committed successfully
+2025-02-04 22:00:36,148 - app - INFO - Closing database session
+2025-02-04 22:00:51,148 - app - INFO - Creating database session
+2025-02-04 22:00:51,148 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:00:51,149 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:00:51,367 - app - INFO - Parsing weather data
+2025-02-04 22:00:51,373 - app - INFO - Transaction committed successfully
+2025-02-04 22:00:51,373 - app - INFO - Transaction committed successfully
+2025-02-04 22:00:51,373 - app - INFO - Closing database session
+2025-02-04 22:01:06,377 - app - INFO - Creating database session
+2025-02-04 22:01:06,377 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:01:06,378 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:01:06,573 - app - INFO - Parsing weather data
+2025-02-04 22:01:06,580 - app - INFO - Transaction committed successfully
+2025-02-04 22:01:06,581 - app - INFO - Transaction committed successfully
+2025-02-04 22:01:06,582 - app - INFO - Closing database session
+2025-02-04 22:01:21,092 - app - INFO - Creating database session
+2025-02-04 22:01:21,095 - app - INFO - A request for a list of cities was received
+2025-02-04 22:01:21,096 - app - INFO - Getting all cities
+2025-02-04 22:01:21,102 - app - INFO - Building response for a list of cities
+2025-02-04 22:01:21,102 - app - INFO - Building weather response
+2025-02-04 22:01:21,103 - app - INFO - Building weather response
+2025-02-04 22:01:21,103 - app - INFO - Building weather response
+2025-02-04 22:01:21,104 - app - INFO - Building weather response
+2025-02-04 22:01:21,105 - app - INFO - Building weather response
+2025-02-04 22:01:21,106 - app - INFO - Building weather response
+2025-02-04 22:01:21,106 - app - INFO - Building weather response
+2025-02-04 22:01:21,107 - app - INFO - Building weather response
+2025-02-04 22:01:21,107 - app - INFO - Building weather response
+2025-02-04 22:01:21,108 - app - INFO - Building weather response
+2025-02-04 22:01:21,108 - app - INFO - Building weather response
+2025-02-04 22:01:21,109 - app - INFO - Building weather response
+2025-02-04 22:01:21,110 - app - INFO - Building weather response
+2025-02-04 22:01:21,110 - app - INFO - Building weather response
+2025-02-04 22:01:21,111 - app - INFO - Building weather response
+2025-02-04 22:01:21,111 - app - INFO - Building weather response
+2025-02-04 22:01:21,112 - app - INFO - Building weather response
+2025-02-04 22:01:21,112 - app - INFO - Building weather response
+2025-02-04 22:01:21,113 - app - INFO - Building weather response
+2025-02-04 22:01:21,114 - app - INFO - Building weather response
+2025-02-04 22:01:21,115 - app - INFO - Building weather response
+2025-02-04 22:01:21,116 - app - INFO - Building weather response
+2025-02-04 22:01:21,116 - app - INFO - Building weather response
+2025-02-04 22:01:21,117 - app - INFO - Building weather response
+2025-02-04 22:01:21,117 - app - INFO - Building weather response
+2025-02-04 22:01:21,118 - app - INFO - Building weather response
+2025-02-04 22:01:21,119 - app - INFO - Building weather response
+2025-02-04 22:01:21,120 - app - INFO - Building weather response
+2025-02-04 22:01:21,120 - app - INFO - Building weather response
+2025-02-04 22:01:21,121 - app - INFO - Building weather response
+2025-02-04 22:01:21,122 - app - INFO - Building weather response
+2025-02-04 22:01:21,122 - app - INFO - Building weather response
+2025-02-04 22:01:21,124 - app - INFO - Building weather response
+2025-02-04 22:01:21,125 - app - INFO - Building weather response
+2025-02-04 22:01:21,125 - app - INFO - Building weather response
+2025-02-04 22:01:21,126 - app - INFO - Building weather response
+2025-02-04 22:01:21,126 - app - INFO - Building weather response
+2025-02-04 22:01:21,126 - app - INFO - Building weather response
+2025-02-04 22:01:21,126 - app - INFO - Building weather response
+2025-02-04 22:01:21,127 - app - INFO - Building weather response
+2025-02-04 22:01:21,127 - app - INFO - Building weather response
+2025-02-04 22:01:21,127 - app - INFO - Building weather response
+2025-02-04 22:01:21,128 - app - INFO - Building weather response
+2025-02-04 22:01:21,128 - app - INFO - Building weather response
+2025-02-04 22:01:21,129 - app - INFO - Building weather response
+2025-02-04 22:01:21,130 - app - INFO - Building weather response
+2025-02-04 22:01:21,130 - app - INFO - Building weather response
+2025-02-04 22:01:21,130 - app - INFO - Building weather response
+2025-02-04 22:01:21,131 - app - INFO - Building weather response
+2025-02-04 22:01:21,131 - app - INFO - Building weather response
+2025-02-04 22:01:21,132 - app - INFO - Building weather response
+2025-02-04 22:01:21,132 - app - INFO - Building weather response
+2025-02-04 22:01:21,132 - app - INFO - Building weather response
+2025-02-04 22:01:21,133 - app - INFO - Building weather response
+2025-02-04 22:01:21,133 - app - INFO - Building weather response
+2025-02-04 22:01:21,133 - app - INFO - Building weather response
+2025-02-04 22:01:21,134 - app - INFO - Building weather response
+2025-02-04 22:01:21,134 - app - INFO - Building weather response
+2025-02-04 22:01:21,135 - app - INFO - Building weather response
+2025-02-04 22:01:21,136 - app - INFO - Building weather response
+2025-02-04 22:01:21,136 - app - INFO - Building weather response
+2025-02-04 22:01:21,137 - app - INFO - Building weather response
+2025-02-04 22:01:21,137 - app - INFO - Building weather response
+2025-02-04 22:01:21,138 - app - INFO - Building weather response
+2025-02-04 22:01:21,139 - app - INFO - Building weather response
+2025-02-04 22:01:21,140 - app - INFO - Building weather response
+2025-02-04 22:01:21,140 - app - INFO - Building weather response
+2025-02-04 22:01:21,140 - app - INFO - Building weather response
+2025-02-04 22:01:21,140 - app - INFO - Building weather response
+2025-02-04 22:01:21,141 - app - INFO - Building weather response
+2025-02-04 22:01:21,141 - app - INFO - Building weather response
+2025-02-04 22:01:21,141 - app - INFO - Building weather response
+2025-02-04 22:01:21,141 - app - INFO - Building weather response
+2025-02-04 22:01:21,142 - app - INFO - Building weather response
+2025-02-04 22:01:21,142 - app - INFO - Building weather response
+2025-02-04 22:01:21,142 - app - INFO - Building weather response
+2025-02-04 22:01:21,143 - app - INFO - Building weather response
+2025-02-04 22:01:21,143 - app - INFO - Building weather response
+2025-02-04 22:01:21,143 - app - INFO - Building weather response
+2025-02-04 22:01:21,143 - app - INFO - Building weather response
+2025-02-04 22:01:21,144 - app - INFO - Building weather response
+2025-02-04 22:01:21,144 - app - INFO - Building weather response
+2025-02-04 22:01:21,144 - app - INFO - Building weather response
+2025-02-04 22:01:21,144 - app - INFO - Building weather response
+2025-02-04 22:01:21,145 - app - INFO - Building weather response
+2025-02-04 22:01:21,145 - app - INFO - Building weather response
+2025-02-04 22:01:21,145 - app - INFO - Building weather response
+2025-02-04 22:01:21,145 - app - INFO - Building weather response
+2025-02-04 22:01:21,146 - app - INFO - Building weather response
+2025-02-04 22:01:21,146 - app - INFO - Building weather response
+2025-02-04 22:01:21,146 - app - INFO - Building weather response
+2025-02-04 22:01:21,146 - app - INFO - Building weather response
+2025-02-04 22:01:21,147 - app - INFO - Building weather response
+2025-02-04 22:01:21,147 - app - INFO - Building weather response
+2025-02-04 22:01:21,147 - app - INFO - Building weather response
+2025-02-04 22:01:21,148 - app - INFO - Building weather response
+2025-02-04 22:01:21,150 - app - INFO - Closing database session
+2025-02-04 22:01:21,608 - app - INFO - Creating database session
+2025-02-04 22:01:21,608 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:01:21,609 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:01:21,804 - app - INFO - Parsing weather data
+2025-02-04 22:01:21,810 - app - INFO - Transaction committed successfully
+2025-02-04 22:01:21,811 - app - INFO - Transaction committed successfully
+2025-02-04 22:01:21,812 - app - INFO - Closing database session
+2025-02-04 22:01:36,823 - app - INFO - Creating database session
+2025-02-04 22:01:36,823 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:01:36,823 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:01:37,015 - app - INFO - Parsing weather data
+2025-02-04 22:01:37,021 - app - INFO - Transaction committed successfully
+2025-02-04 22:01:37,023 - app - INFO - Transaction committed successfully
+2025-02-04 22:01:37,023 - app - INFO - Closing database session
+2025-02-04 22:01:42,372 - app - INFO - Creating database session
+2025-02-04 22:01:42,373 - app - INFO - A request for a list of cities was received
+2025-02-04 22:01:42,374 - app - INFO - Getting all cities
+2025-02-04 22:01:42,378 - app - INFO - Building response for a list of cities
+2025-02-04 22:01:42,379 - app - INFO - Building weather response
+2025-02-04 22:01:42,379 - app - INFO - Building weather response
+2025-02-04 22:01:42,379 - app - INFO - Building weather response
+2025-02-04 22:01:42,380 - app - INFO - Building weather response
+2025-02-04 22:01:42,381 - app - INFO - Building weather response
+2025-02-04 22:01:42,381 - app - INFO - Building weather response
+2025-02-04 22:01:42,382 - app - INFO - Building weather response
+2025-02-04 22:01:42,382 - app - INFO - Building weather response
+2025-02-04 22:01:42,383 - app - INFO - Building weather response
+2025-02-04 22:01:42,383 - app - INFO - Building weather response
+2025-02-04 22:01:42,384 - app - INFO - Building weather response
+2025-02-04 22:01:42,384 - app - INFO - Building weather response
+2025-02-04 22:01:42,385 - app - INFO - Building weather response
+2025-02-04 22:01:42,385 - app - INFO - Building weather response
+2025-02-04 22:01:42,385 - app - INFO - Building weather response
+2025-02-04 22:01:42,385 - app - INFO - Building weather response
+2025-02-04 22:01:42,385 - app - INFO - Building weather response
+2025-02-04 22:01:42,386 - app - INFO - Building weather response
+2025-02-04 22:01:42,386 - app - INFO - Building weather response
+2025-02-04 22:01:42,386 - app - INFO - Building weather response
+2025-02-04 22:01:42,387 - app - INFO - Building weather response
+2025-02-04 22:01:42,387 - app - INFO - Building weather response
+2025-02-04 22:01:42,388 - app - INFO - Building weather response
+2025-02-04 22:01:42,388 - app - INFO - Building weather response
+2025-02-04 22:01:42,388 - app - INFO - Building weather response
+2025-02-04 22:01:42,389 - app - INFO - Building weather response
+2025-02-04 22:01:42,389 - app - INFO - Building weather response
+2025-02-04 22:01:42,389 - app - INFO - Building weather response
+2025-02-04 22:01:42,389 - app - INFO - Building weather response
+2025-02-04 22:01:42,390 - app - INFO - Building weather response
+2025-02-04 22:01:42,390 - app - INFO - Building weather response
+2025-02-04 22:01:42,390 - app - INFO - Building weather response
+2025-02-04 22:01:42,391 - app - INFO - Building weather response
+2025-02-04 22:01:42,391 - app - INFO - Building weather response
+2025-02-04 22:01:42,391 - app - INFO - Building weather response
+2025-02-04 22:01:42,392 - app - INFO - Building weather response
+2025-02-04 22:01:42,392 - app - INFO - Building weather response
+2025-02-04 22:01:42,392 - app - INFO - Building weather response
+2025-02-04 22:01:42,393 - app - INFO - Building weather response
+2025-02-04 22:01:42,393 - app - INFO - Building weather response
+2025-02-04 22:01:42,393 - app - INFO - Building weather response
+2025-02-04 22:01:42,393 - app - INFO - Building weather response
+2025-02-04 22:01:42,394 - app - INFO - Building weather response
+2025-02-04 22:01:42,394 - app - INFO - Building weather response
+2025-02-04 22:01:42,394 - app - INFO - Building weather response
+2025-02-04 22:01:42,395 - app - INFO - Building weather response
+2025-02-04 22:01:42,395 - app - INFO - Building weather response
+2025-02-04 22:01:42,395 - app - INFO - Building weather response
+2025-02-04 22:01:42,396 - app - INFO - Building weather response
+2025-02-04 22:01:42,396 - app - INFO - Building weather response
+2025-02-04 22:01:42,396 - app - INFO - Building weather response
+2025-02-04 22:01:42,397 - app - INFO - Building weather response
+2025-02-04 22:01:42,397 - app - INFO - Building weather response
+2025-02-04 22:01:42,398 - app - INFO - Building weather response
+2025-02-04 22:01:42,398 - app - INFO - Building weather response
+2025-02-04 22:01:42,398 - app - INFO - Building weather response
+2025-02-04 22:01:42,399 - app - INFO - Building weather response
+2025-02-04 22:01:42,400 - app - INFO - Building weather response
+2025-02-04 22:01:42,400 - app - INFO - Building weather response
+2025-02-04 22:01:42,400 - app - INFO - Building weather response
+2025-02-04 22:01:42,401 - app - INFO - Building weather response
+2025-02-04 22:01:42,401 - app - INFO - Building weather response
+2025-02-04 22:01:42,401 - app - INFO - Building weather response
+2025-02-04 22:01:42,401 - app - INFO - Building weather response
+2025-02-04 22:01:42,401 - app - INFO - Building weather response
+2025-02-04 22:01:42,402 - app - INFO - Building weather response
+2025-02-04 22:01:42,402 - app - INFO - Building weather response
+2025-02-04 22:01:42,402 - app - INFO - Building weather response
+2025-02-04 22:01:42,402 - app - INFO - Building weather response
+2025-02-04 22:01:42,402 - app - INFO - Building weather response
+2025-02-04 22:01:42,403 - app - INFO - Building weather response
+2025-02-04 22:01:42,403 - app - INFO - Building weather response
+2025-02-04 22:01:42,403 - app - INFO - Building weather response
+2025-02-04 22:01:42,403 - app - INFO - Building weather response
+2025-02-04 22:01:42,404 - app - INFO - Building weather response
+2025-02-04 22:01:42,405 - app - INFO - Building weather response
+2025-02-04 22:01:42,405 - app - INFO - Building weather response
+2025-02-04 22:01:42,405 - app - INFO - Building weather response
+2025-02-04 22:01:42,406 - app - INFO - Building weather response
+2025-02-04 22:01:42,406 - app - INFO - Building weather response
+2025-02-04 22:01:42,406 - app - INFO - Building weather response
+2025-02-04 22:01:42,407 - app - INFO - Building weather response
+2025-02-04 22:01:42,407 - app - INFO - Building weather response
+2025-02-04 22:01:42,407 - app - INFO - Building weather response
+2025-02-04 22:01:42,407 - app - INFO - Building weather response
+2025-02-04 22:01:42,408 - app - INFO - Building weather response
+2025-02-04 22:01:42,408 - app - INFO - Building weather response
+2025-02-04 22:01:42,408 - app - INFO - Building weather response
+2025-02-04 22:01:42,408 - app - INFO - Building weather response
+2025-02-04 22:01:42,408 - app - INFO - Building weather response
+2025-02-04 22:01:42,409 - app - INFO - Building weather response
+2025-02-04 22:01:42,409 - app - INFO - Building weather response
+2025-02-04 22:01:42,409 - app - INFO - Building weather response
+2025-02-04 22:01:42,409 - app - INFO - Building weather response
+2025-02-04 22:01:42,409 - app - INFO - Building weather response
+2025-02-04 22:01:42,410 - app - INFO - Building weather response
+2025-02-04 22:01:42,411 - app - INFO - Closing database session
+2025-02-04 22:01:52,027 - app - INFO - Creating database session
+2025-02-04 22:01:52,027 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:01:52,027 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:01:52,233 - app - INFO - Parsing weather data
+2025-02-04 22:01:52,240 - app - INFO - Transaction committed successfully
+2025-02-04 22:01:52,241 - app - INFO - Transaction committed successfully
+2025-02-04 22:01:52,241 - app - INFO - Closing database session
+2025-02-04 22:02:07,222 - app - INFO - Creating database session
+2025-02-04 22:02:07,222 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:02:07,223 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:02:07,428 - app - INFO - Parsing weather data
+2025-02-04 22:02:07,434 - app - INFO - Transaction committed successfully
+2025-02-04 22:02:07,434 - app - INFO - Transaction committed successfully
+2025-02-04 22:02:07,435 - app - INFO - Closing database session
+2025-02-04 22:02:08,982 - app - INFO - Creating database session
+2025-02-04 22:02:08,984 - app - INFO - A request for a list of cities was received
+2025-02-04 22:02:08,984 - app - INFO - Getting all cities
+2025-02-04 22:02:08,988 - app - INFO - Building response for a list of cities
+2025-02-04 22:02:08,989 - app - INFO - Building weather response
+2025-02-04 22:02:08,989 - app - INFO - Building weather response
+2025-02-04 22:02:08,989 - app - INFO - Building weather response
+2025-02-04 22:02:08,990 - app - INFO - Building weather response
+2025-02-04 22:02:08,990 - app - INFO - Building weather response
+2025-02-04 22:02:08,990 - app - INFO - Building weather response
+2025-02-04 22:02:08,991 - app - INFO - Building weather response
+2025-02-04 22:02:08,991 - app - INFO - Building weather response
+2025-02-04 22:02:08,991 - app - INFO - Building weather response
+2025-02-04 22:02:08,992 - app - INFO - Building weather response
+2025-02-04 22:02:08,992 - app - INFO - Building weather response
+2025-02-04 22:02:08,993 - app - INFO - Building weather response
+2025-02-04 22:02:08,993 - app - INFO - Building weather response
+2025-02-04 22:02:08,993 - app - INFO - Building weather response
+2025-02-04 22:02:08,994 - app - INFO - Building weather response
+2025-02-04 22:02:08,994 - app - INFO - Building weather response
+2025-02-04 22:02:08,994 - app - INFO - Building weather response
+2025-02-04 22:02:08,994 - app - INFO - Building weather response
+2025-02-04 22:02:08,995 - app - INFO - Building weather response
+2025-02-04 22:02:08,996 - app - INFO - Building weather response
+2025-02-04 22:02:08,996 - app - INFO - Building weather response
+2025-02-04 22:02:08,997 - app - INFO - Building weather response
+2025-02-04 22:02:08,998 - app - INFO - Building weather response
+2025-02-04 22:02:08,998 - app - INFO - Building weather response
+2025-02-04 22:02:08,999 - app - INFO - Building weather response
+2025-02-04 22:02:09,000 - app - INFO - Building weather response
+2025-02-04 22:02:09,001 - app - INFO - Building weather response
+2025-02-04 22:02:09,002 - app - INFO - Building weather response
+2025-02-04 22:02:09,002 - app - INFO - Building weather response
+2025-02-04 22:02:09,002 - app - INFO - Building weather response
+2025-02-04 22:02:09,002 - app - INFO - Building weather response
+2025-02-04 22:02:09,003 - app - INFO - Building weather response
+2025-02-04 22:02:09,003 - app - INFO - Building weather response
+2025-02-04 22:02:09,003 - app - INFO - Building weather response
+2025-02-04 22:02:09,004 - app - INFO - Building weather response
+2025-02-04 22:02:09,004 - app - INFO - Building weather response
+2025-02-04 22:02:09,004 - app - INFO - Building weather response
+2025-02-04 22:02:09,004 - app - INFO - Building weather response
+2025-02-04 22:02:09,005 - app - INFO - Building weather response
+2025-02-04 22:02:09,005 - app - INFO - Building weather response
+2025-02-04 22:02:09,005 - app - INFO - Building weather response
+2025-02-04 22:02:09,005 - app - INFO - Building weather response
+2025-02-04 22:02:09,005 - app - INFO - Building weather response
+2025-02-04 22:02:09,006 - app - INFO - Building weather response
+2025-02-04 22:02:09,006 - app - INFO - Building weather response
+2025-02-04 22:02:09,007 - app - INFO - Building weather response
+2025-02-04 22:02:09,007 - app - INFO - Building weather response
+2025-02-04 22:02:09,007 - app - INFO - Building weather response
+2025-02-04 22:02:09,008 - app - INFO - Building weather response
+2025-02-04 22:02:09,008 - app - INFO - Building weather response
+2025-02-04 22:02:09,008 - app - INFO - Building weather response
+2025-02-04 22:02:09,008 - app - INFO - Building weather response
+2025-02-04 22:02:09,010 - app - INFO - Building weather response
+2025-02-04 22:02:09,010 - app - INFO - Building weather response
+2025-02-04 22:02:09,010 - app - INFO - Building weather response
+2025-02-04 22:02:09,010 - app - INFO - Building weather response
+2025-02-04 22:02:09,010 - app - INFO - Building weather response
+2025-02-04 22:02:09,010 - app - INFO - Building weather response
+2025-02-04 22:02:09,011 - app - INFO - Building weather response
+2025-02-04 22:02:09,011 - app - INFO - Building weather response
+2025-02-04 22:02:09,013 - app - INFO - Building weather response
+2025-02-04 22:02:09,013 - app - INFO - Building weather response
+2025-02-04 22:02:09,013 - app - INFO - Building weather response
+2025-02-04 22:02:09,013 - app - INFO - Building weather response
+2025-02-04 22:02:09,015 - app - INFO - Building weather response
+2025-02-04 22:02:09,015 - app - INFO - Building weather response
+2025-02-04 22:02:09,016 - app - INFO - Building weather response
+2025-02-04 22:02:09,016 - app - INFO - Building weather response
+2025-02-04 22:02:09,016 - app - INFO - Building weather response
+2025-02-04 22:02:09,016 - app - INFO - Building weather response
+2025-02-04 22:02:09,016 - app - INFO - Building weather response
+2025-02-04 22:02:09,016 - app - INFO - Building weather response
+2025-02-04 22:02:09,018 - app - INFO - Building weather response
+2025-02-04 22:02:09,018 - app - INFO - Building weather response
+2025-02-04 22:02:09,018 - app - INFO - Building weather response
+2025-02-04 22:02:09,018 - app - INFO - Building weather response
+2025-02-04 22:02:09,018 - app - INFO - Building weather response
+2025-02-04 22:02:09,018 - app - INFO - Building weather response
+2025-02-04 22:02:09,019 - app - INFO - Building weather response
+2025-02-04 22:02:09,019 - app - INFO - Building weather response
+2025-02-04 22:02:09,019 - app - INFO - Building weather response
+2025-02-04 22:02:09,019 - app - INFO - Building weather response
+2025-02-04 22:02:09,019 - app - INFO - Building weather response
+2025-02-04 22:02:09,020 - app - INFO - Building weather response
+2025-02-04 22:02:09,020 - app - INFO - Building weather response
+2025-02-04 22:02:09,020 - app - INFO - Building weather response
+2025-02-04 22:02:09,020 - app - INFO - Building weather response
+2025-02-04 22:02:09,021 - app - INFO - Building weather response
+2025-02-04 22:02:09,021 - app - INFO - Building weather response
+2025-02-04 22:02:09,021 - app - INFO - Building weather response
+2025-02-04 22:02:09,021 - app - INFO - Building weather response
+2025-02-04 22:02:09,021 - app - INFO - Building weather response
+2025-02-04 22:02:09,021 - app - INFO - Building weather response
+2025-02-04 22:02:09,022 - app - INFO - Building weather response
+2025-02-04 22:02:09,022 - app - INFO - Building weather response
+2025-02-04 22:02:09,022 - app - INFO - Building weather response
+2025-02-04 22:02:09,023 - app - INFO - Closing database session
+2025-02-04 22:02:22,456 - app - INFO - Creating database session
+2025-02-04 22:02:22,456 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:02:22,457 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:02:22,663 - app - INFO - Parsing weather data
+2025-02-04 22:02:22,670 - app - INFO - Transaction committed successfully
+2025-02-04 22:02:22,671 - app - INFO - Transaction committed successfully
+2025-02-04 22:02:22,671 - app - INFO - Closing database session
+2025-02-04 22:02:37,687 - app - INFO - Creating database session
+2025-02-04 22:02:37,687 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:02:37,688 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:02:37,879 - app - INFO - Parsing weather data
+2025-02-04 22:02:37,884 - app - INFO - Transaction committed successfully
+2025-02-04 22:02:37,885 - app - INFO - Transaction committed successfully
+2025-02-04 22:02:37,886 - app - INFO - Closing database session
+2025-02-04 22:02:52,893 - app - INFO - Creating database session
+2025-02-04 22:02:52,894 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:02:52,894 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:02:53,087 - app - INFO - Parsing weather data
+2025-02-04 22:02:53,094 - app - INFO - Transaction committed successfully
+2025-02-04 22:02:53,096 - app - INFO - Transaction committed successfully
+2025-02-04 22:02:53,097 - app - INFO - Closing database session
+2025-02-04 22:03:02,015 - app - INFO - Creating database session
+2025-02-04 22:03:02,018 - app - INFO - Requesting weather for city string at time 2025-02-04 12:00:00
+2025-02-04 22:03:02,019 - app - INFO - Getting city by name string
+2025-02-04 22:03:02,021 - app - ERROR - City not found
+2025-02-04 22:03:02,021 - app - ERROR - City with name string not found
+2025-02-04 22:03:02,022 - app - INFO - Closing database session
+2025-02-04 22:03:08,128 - app - INFO - Creating database session
+2025-02-04 22:03:08,128 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:03:08,129 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:03:08,321 - app - INFO - Parsing weather data
+2025-02-04 22:03:08,331 - app - INFO - Transaction committed successfully
+2025-02-04 22:03:08,332 - app - INFO - Transaction committed successfully
+2025-02-04 22:03:08,332 - app - INFO - Closing database session
+2025-02-04 22:03:23,359 - app - INFO - Creating database session
+2025-02-04 22:03:23,360 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:03:23,360 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:03:23,553 - app - INFO - Parsing weather data
+2025-02-04 22:03:23,560 - app - INFO - Transaction committed successfully
+2025-02-04 22:03:23,561 - app - INFO - Transaction committed successfully
+2025-02-04 22:03:23,562 - app - INFO - Closing database session
+2025-02-04 22:03:38,568 - app - INFO - Creating database session
+2025-02-04 22:03:38,568 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:03:38,569 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:03:38,779 - app - INFO - Parsing weather data
+2025-02-04 22:03:38,785 - app - INFO - Transaction committed successfully
+2025-02-04 22:03:38,786 - app - INFO - Transaction committed successfully
+2025-02-04 22:03:38,786 - app - INFO - Closing database session
+2025-02-04 22:03:53,800 - app - INFO - Creating database session
+2025-02-04 22:03:53,801 - app - INFO - Updating weather for city ID 1
+2025-02-04 22:03:53,801 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 22:03:53,992 - app - INFO - Parsing weather data
+2025-02-04 22:03:54,000 - app - INFO - Transaction committed successfully
+2025-02-04 22:03:54,001 - app - INFO - Transaction committed successfully
+2025-02-04 22:03:54,002 - app - INFO - Closing database session
+2025-02-04 22:04:08,771 - app - INFO - Creating database tables
+2025-02-04 22:04:12,304 - app - INFO - Creating database session
+2025-02-04 22:04:12,307 - app - INFO - Requesting weather for city 'string' at time 2025-02-04 12:00:00
+2025-02-04 22:04:12,307 - app - INFO - Getting city by name string
+2025-02-04 22:04:12,325 - app - ERROR - City not found
+2025-02-04 22:04:12,325 - app - ERROR - City with name string not found
+2025-02-04 22:04:12,326 - app - INFO - Closing database session
+2025-02-04 22:04:46,040 - app - INFO - Creating database session
+2025-02-04 22:04:46,042 - app - INFO - Requesting weather for city 'Moscow' at time 2025-02-03 12:00:00
+2025-02-04 22:04:46,043 - app - ERROR - The time should be today
+2025-02-04 22:04:46,044 - app - INFO - Closing database session
+2025-02-04 22:05:23,420 - app - INFO - Creating database session
+2025-02-04 22:05:23,421 - app - INFO - Requesting weather for city 'Moscow' at time 2025-02-04 12:00:00
+2025-02-04 22:05:23,421 - app - INFO - Getting city by name Moscow
+2025-02-04 22:05:23,427 - app - INFO - Trying to get weather from DB
+2025-02-04 22:05:23,428 - app - INFO - Building weather response
+2025-02-04 22:05:23,431 - app - INFO - Closing database session
+2025-02-04 22:06:09,319 - app - INFO - Creating database session
+2025-02-04 22:06:09,322 - app - INFO - Requesting weather for city 'Moscow' at time 2025-02-04 12:00:00
+2025-02-04 22:06:09,322 - app - INFO - Getting city by name Moscow
+2025-02-04 22:06:09,328 - app - INFO - Trying to get weather from DB
+2025-02-04 22:06:09,329 - app - INFO - Building weather response
+2025-02-04 22:06:09,331 - app - INFO - Closing database session
+2025-02-04 22:06:20,301 - app - INFO - Creating database tables
+2025-02-04 22:06:21,537 - app - INFO - Creating database session
+2025-02-04 22:06:21,540 - app - INFO - Requesting weather for city 'Moscow' at time 2025-02-04 12:00:00
+2025-02-04 22:06:21,541 - app - INFO - Getting city by name Moscow
+2025-02-04 22:06:21,562 - app - INFO - Trying to get weather from DB
+2025-02-04 22:06:21,563 - app - INFO - Weather found in DB
+2025-02-04 22:06:21,564 - app - INFO - Building weather response
+2025-02-04 22:06:21,565 - app - INFO - Closing database session
+2025-02-04 23:06:49,088 - app - INFO - Creating database tables
+2025-02-04 23:06:58,913 - app - INFO - Creating database session
+2025-02-04 23:06:58,915 - app - INFO - Received a request to get the list of cities
+2025-02-04 23:06:58,916 - app - INFO - Getting all city names
+2025-02-04 23:06:58,924 - app - INFO - Building response for a list of cities
+2025-02-04 23:06:58,928 - app - INFO - Closing database session
+2025-02-04 23:07:11,613 - app - INFO - Creating database session
+2025-02-04 23:07:11,615 - app - INFO - Received a request to get the list of cities
+2025-02-04 23:07:11,615 - app - INFO - Getting all cities
+2025-02-04 23:07:11,627 - app - INFO - Building response for a list of cities
+2025-02-04 23:07:11,628 - app - INFO - Building weather response
+2025-02-04 23:07:11,629 - app - INFO - Building weather response
+2025-02-04 23:07:11,630 - app - INFO - Building weather response
+2025-02-04 23:07:11,631 - app - INFO - Building weather response
+2025-02-04 23:07:11,631 - app - INFO - Building weather response
+2025-02-04 23:07:11,632 - app - INFO - Building weather response
+2025-02-04 23:07:11,633 - app - INFO - Building weather response
+2025-02-04 23:07:11,633 - app - INFO - Building weather response
+2025-02-04 23:07:11,634 - app - INFO - Building weather response
+2025-02-04 23:07:11,634 - app - INFO - Building weather response
+2025-02-04 23:07:11,635 - app - INFO - Building weather response
+2025-02-04 23:07:11,635 - app - INFO - Building weather response
+2025-02-04 23:07:11,635 - app - INFO - Building weather response
+2025-02-04 23:07:11,635 - app - INFO - Building weather response
+2025-02-04 23:07:11,636 - app - INFO - Building weather response
+2025-02-04 23:07:11,637 - app - INFO - Building weather response
+2025-02-04 23:07:11,639 - app - INFO - Building weather response
+2025-02-04 23:07:11,641 - app - INFO - Building weather response
+2025-02-04 23:07:11,642 - app - INFO - Building weather response
+2025-02-04 23:07:11,642 - app - INFO - Building weather response
+2025-02-04 23:07:11,643 - app - INFO - Building weather response
+2025-02-04 23:07:11,643 - app - INFO - Building weather response
+2025-02-04 23:07:11,645 - app - INFO - Building weather response
+2025-02-04 23:07:11,645 - app - INFO - Building weather response
+2025-02-04 23:07:11,645 - app - INFO - Building weather response
+2025-02-04 23:07:11,646 - app - INFO - Building weather response
+2025-02-04 23:07:11,646 - app - INFO - Building weather response
+2025-02-04 23:07:11,647 - app - INFO - Building weather response
+2025-02-04 23:07:11,647 - app - INFO - Building weather response
+2025-02-04 23:07:11,648 - app - INFO - Building weather response
+2025-02-04 23:07:11,649 - app - INFO - Building weather response
+2025-02-04 23:07:11,649 - app - INFO - Building weather response
+2025-02-04 23:07:11,650 - app - INFO - Building weather response
+2025-02-04 23:07:11,650 - app - INFO - Building weather response
+2025-02-04 23:07:11,651 - app - INFO - Building weather response
+2025-02-04 23:07:11,651 - app - INFO - Building weather response
+2025-02-04 23:07:11,652 - app - INFO - Building weather response
+2025-02-04 23:07:11,652 - app - INFO - Building weather response
+2025-02-04 23:07:11,652 - app - INFO - Building weather response
+2025-02-04 23:07:11,653 - app - INFO - Building weather response
+2025-02-04 23:07:11,653 - app - INFO - Building weather response
+2025-02-04 23:07:11,653 - app - INFO - Building weather response
+2025-02-04 23:07:11,653 - app - INFO - Building weather response
+2025-02-04 23:07:11,654 - app - INFO - Building weather response
+2025-02-04 23:07:11,655 - app - INFO - Building weather response
+2025-02-04 23:07:11,655 - app - INFO - Building weather response
+2025-02-04 23:07:11,659 - app - INFO - Building weather response
+2025-02-04 23:07:11,660 - app - INFO - Building weather response
+2025-02-04 23:07:11,661 - app - INFO - Building weather response
+2025-02-04 23:07:11,661 - app - INFO - Building weather response
+2025-02-04 23:07:11,661 - app - INFO - Building weather response
+2025-02-04 23:07:11,662 - app - INFO - Building weather response
+2025-02-04 23:07:11,663 - app - INFO - Building weather response
+2025-02-04 23:07:11,663 - app - INFO - Building weather response
+2025-02-04 23:07:11,665 - app - INFO - Building weather response
+2025-02-04 23:07:11,666 - app - INFO - Building weather response
+2025-02-04 23:07:11,667 - app - INFO - Building weather response
+2025-02-04 23:07:11,667 - app - INFO - Building weather response
+2025-02-04 23:07:11,668 - app - INFO - Building weather response
+2025-02-04 23:07:11,668 - app - INFO - Building weather response
+2025-02-04 23:07:11,668 - app - INFO - Building weather response
+2025-02-04 23:07:11,669 - app - INFO - Building weather response
+2025-02-04 23:07:11,669 - app - INFO - Building weather response
+2025-02-04 23:07:11,670 - app - INFO - Building weather response
+2025-02-04 23:07:11,671 - app - INFO - Building weather response
+2025-02-04 23:07:11,672 - app - INFO - Building weather response
+2025-02-04 23:07:11,673 - app - INFO - Building weather response
+2025-02-04 23:07:11,674 - app - INFO - Building weather response
+2025-02-04 23:07:11,674 - app - INFO - Building weather response
+2025-02-04 23:07:11,675 - app - INFO - Building weather response
+2025-02-04 23:07:11,676 - app - INFO - Building weather response
+2025-02-04 23:07:11,676 - app - INFO - Building weather response
+2025-02-04 23:07:11,677 - app - INFO - Building weather response
+2025-02-04 23:07:11,677 - app - INFO - Building weather response
+2025-02-04 23:07:11,677 - app - INFO - Building weather response
+2025-02-04 23:07:11,678 - app - INFO - Building weather response
+2025-02-04 23:07:11,678 - app - INFO - Building weather response
+2025-02-04 23:07:11,678 - app - INFO - Building weather response
+2025-02-04 23:07:11,680 - app - INFO - Building weather response
+2025-02-04 23:07:11,680 - app - INFO - Building weather response
+2025-02-04 23:07:11,681 - app - INFO - Building weather response
+2025-02-04 23:07:11,681 - app - INFO - Building weather response
+2025-02-04 23:07:11,682 - app - INFO - Building weather response
+2025-02-04 23:07:11,682 - app - INFO - Building weather response
+2025-02-04 23:07:11,682 - app - INFO - Building weather response
+2025-02-04 23:07:11,682 - app - INFO - Building weather response
+2025-02-04 23:07:11,683 - app - INFO - Building weather response
+2025-02-04 23:07:11,683 - app - INFO - Building weather response
+2025-02-04 23:07:11,683 - app - INFO - Building weather response
+2025-02-04 23:07:11,684 - app - INFO - Building weather response
+2025-02-04 23:07:11,684 - app - INFO - Building weather response
+2025-02-04 23:07:11,684 - app - INFO - Building weather response
+2025-02-04 23:07:11,684 - app - INFO - Building weather response
+2025-02-04 23:07:11,685 - app - INFO - Building weather response
+2025-02-04 23:07:11,685 - app - INFO - Building weather response
+2025-02-04 23:07:11,685 - app - INFO - Building weather response
+2025-02-04 23:07:11,687 - app - INFO - Closing database session
+2025-02-04 23:07:37,370 - app - INFO - Creating database session
+2025-02-04 23:07:37,371 - app - INFO - Requesting weather for city 'Moscow' at time 2025-02-04 12:00:00
+2025-02-04 23:07:37,372 - app - INFO - Getting city by name Moscow
+2025-02-04 23:07:37,377 - app - INFO - Trying to get weather from DB
+2025-02-04 23:07:37,377 - app - INFO - Weather found in DB
+2025-02-04 23:07:37,378 - app - INFO - Building weather response
+2025-02-04 23:07:37,379 - app - INFO - Closing database session
+2025-02-04 23:07:43,537 - app - INFO - Creating database session
+2025-02-04 23:07:43,539 - app - INFO - Requesting weather for city 'Mosco' at time 2025-02-04 12:00:00
+2025-02-04 23:07:43,540 - app - INFO - Getting city by name Mosco
+2025-02-04 23:07:43,542 - app - ERROR - City not found
+2025-02-04 23:07:43,543 - app - ERROR - City with name Mosco not found
+2025-02-04 23:07:43,544 - app - INFO - Closing database session
+2025-02-04 23:11:00,820 - app - INFO - Creating database session
+2025-02-04 23:11:00,822 - app - INFO - Requesting weather for city 'Mosco' at time 2025-02-04 12:00:00
+2025-02-04 23:11:00,823 - app - INFO - Getting city by name Mosco
+2025-02-04 23:11:00,825 - app - ERROR - City not found
+2025-02-04 23:11:00,826 - app - ERROR - City with name Mosco not found
+2025-02-04 23:11:00,827 - app - INFO - Closing database session
+2025-02-04 23:11:11,205 - app - INFO - Creating database session
+2025-02-04 23:11:11,208 - app - INFO - Requesting weather for city 'Mosco' at time 2025-02-04 12:00:00
+2025-02-04 23:11:11,209 - app - INFO - Getting city by name Mosco
+2025-02-04 23:11:11,211 - app - ERROR - City not found
+2025-02-04 23:11:11,211 - app - ERROR - City with name Mosco not found
+2025-02-04 23:11:11,213 - app - INFO - Closing database session
+2025-02-04 23:11:15,646 - app - INFO - Creating database session
+2025-02-04 23:11:15,648 - app - INFO - Requesting weather for city 'Mosco' at time 2025-02-04 12:00:00
+2025-02-04 23:11:15,650 - app - INFO - Getting city by name Mosco
+2025-02-04 23:11:15,652 - app - ERROR - City not found
+2025-02-04 23:11:15,652 - app - ERROR - City with name Mosco not found
+2025-02-04 23:11:15,653 - app - INFO - Closing database session
+2025-02-04 23:11:37,347 - app - INFO - Creating database tables
+2025-02-04 23:11:39,125 - app - INFO - Creating database session
+2025-02-04 23:11:39,128 - app - INFO - Requesting weather for city 'Mosco' at time 2025-02-04 12:00:00
+2025-02-04 23:11:39,128 - app - INFO - Getting city by name Mosco
+2025-02-04 23:11:39,143 - app - ERROR - City not found
+2025-02-04 23:11:39,144 - app - ERROR - City with name Mosco not found
+2025-02-04 23:11:39,145 - app - INFO - Closing database session
+2025-02-04 23:11:51,052 - app - INFO - Creating database tables
+2025-02-04 23:11:53,741 - app - INFO - Creating database session
+2025-02-04 23:11:53,743 - app - INFO - Requesting weather for city 'Mosco' at time 2025-02-04 12:00:00
+2025-02-04 23:11:53,743 - app - INFO - Getting city by name Mosco
+2025-02-04 23:11:53,758 - app - ERROR - City not found1
+2025-02-04 23:11:53,758 - app - ERROR - City with name Mosco not found
+2025-02-04 23:11:53,759 - app - INFO - Closing database session
+2025-02-04 23:14:22,681 - app - INFO - Creating database tables
+2025-02-04 23:14:24,613 - app - INFO - Creating database session
+2025-02-04 23:14:24,617 - app - INFO - Requesting weather for city 'Mosco' at time 2025-02-04 12:00:00
+2025-02-04 23:14:24,617 - app - INFO - Getting city by name Mosco
+2025-02-04 23:14:24,633 - app - ERROR - City not found
+2025-02-04 23:14:24,634 - app - ERROR - City with name Mosco not found
+2025-02-04 23:14:24,635 - app - INFO - Closing database session
+2025-02-04 23:14:43,902 - app - INFO - Creating database tables
+2025-02-04 23:14:45,567 - app - INFO - Creating database session
+2025-02-04 23:14:45,570 - app - INFO - Requesting weather for city 'Mosco' at time 2025-02-04 12:00:00
+2025-02-04 23:14:45,571 - app - INFO - Getting city by name Mosco
+2025-02-04 23:14:45,584 - app - ERROR - City not found
+2025-02-04 23:14:45,584 - app - ERROR - City with name Mosco not found
+2025-02-04 23:14:45,585 - app - INFO - Closing database session
+2025-02-04 23:16:48,677 - app - INFO - Creating database tables
+2025-02-04 23:16:53,252 - app - INFO - Creating database session
+2025-02-04 23:16:53,255 - app - INFO - Requesting weather for city 'Mosco' at time 2025-02-04 12:00:00
+2025-02-04 23:16:53,256 - app - INFO - Getting city by name Mosco
+2025-02-04 23:16:53,280 - app - ERROR - City not found
+2025-02-04 23:16:53,283 - app - INFO - Closing database session
+2025-02-04 23:17:44,840 - app - INFO - Creating database tables
+2025-02-04 23:17:46,037 - app - INFO - Creating database session
+2025-02-04 23:17:46,043 - app - INFO - Requesting weather for city 'Mosco' at time 2025-02-04 12:00:00
+2025-02-04 23:17:46,044 - app - INFO - Getting city by name Mosco
+2025-02-04 23:17:46,064 - app - ERROR - City not found
+2025-02-04 23:17:46,066 - app - ERROR - City with name Mosco not found
+2025-02-04 23:17:46,078 - app - INFO - Closing database session
+2025-02-04 23:17:56,219 - app - INFO - Creating database session
+2025-02-04 23:17:56,220 - app - INFO - Requesting weather for city 'Moscow' at time 2025-03-04 12:00:00
+2025-02-04 23:17:56,221 - app - ERROR - The time should be today
+2025-02-04 23:17:56,222 - app - INFO - Closing database session
+2025-02-04 23:18:03,807 - app - INFO - Creating database session
+2025-02-04 23:18:03,809 - app - INFO - Requesting weather for city 'Moscow' at time 2025-02-04 12:00:00
+2025-02-04 23:18:03,810 - app - INFO - Getting city by name Moscow
+2025-02-04 23:18:03,817 - app - INFO - Trying to get weather from DB
+2025-02-04 23:18:03,818 - app - INFO - Weather found in DB
+2025-02-04 23:18:03,818 - app - INFO - Building weather response
+2025-02-04 23:18:03,821 - app - INFO - Closing database session
+2025-02-04 23:18:11,588 - app - INFO - Creating database session
+2025-02-04 23:18:11,591 - app - INFO - Requesting weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:18:11,592 - app - INFO - Getting current weather for coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:18:11,593 - app - INFO - Trying to get weather from DB
+2025-02-04 23:18:11,594 - app - INFO - Getting city by coordinates latitude=33.0 longitude=-18.0
+2025-02-04 23:18:11,602 - app - ERROR - City not found
+2025-02-04 23:18:11,603 - app - ERROR - City with coordinates latitude=33.0 longitude=-18.0 not found
+2025-02-04 23:18:11,603 - app - WARNING - Weather not found in DB. Fetching from API
+2025-02-04 23:18:11,604 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 23:18:11,992 - app - INFO - Parsing weather data
+2025-02-04 23:18:11,995 - app - INFO - Building weather response
+2025-02-04 23:18:11,996 - app - INFO - Closing database session
+2025-02-04 23:18:23,749 - app - INFO - Creating database session
+2025-02-04 23:18:23,751 - app - INFO - Requesting weather for city 'Spb' at time 2025-02-04 12:00:00
+2025-02-04 23:18:23,751 - app - INFO - Getting city by name Spb
+2025-02-04 23:18:23,753 - app - ERROR - City not found
+2025-02-04 23:18:23,754 - app - ERROR - City with name Spb not found
+2025-02-04 23:18:23,755 - app - INFO - Closing database session
+2025-02-04 23:18:34,507 - app - INFO - Creating database session
+2025-02-04 23:18:34,509 - app - INFO - Received a request to add a city 'Spb'
+2025-02-04 23:18:34,510 - app - INFO - Adding new city with name 'Spb' and coordinates latitude=77.0 longitude=77.0
+2025-02-04 23:18:34,510 - app - INFO - Checking uniqueness for city: Spb
+2025-02-04 23:18:34,510 - app - INFO - Getting city by name Spb
+2025-02-04 23:18:34,512 - app - ERROR - City not found
+2025-02-04 23:18:34,512 - app - ERROR - City with name Spb not found
+2025-02-04 23:18:34,512 - app - INFO - Getting city by coordinates latitude=77.0 longitude=77.0
+2025-02-04 23:18:34,514 - app - ERROR - City not found
+2025-02-04 23:18:34,516 - app - ERROR - City with coordinates latitude=77.0 longitude=77.0 not found
+2025-02-04 23:18:34,516 - app - INFO - Creating city with weather
+2025-02-04 23:18:34,517 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 23:18:34,714 - app - INFO - Parsing weather data
+2025-02-04 23:18:34,718 - app - INFO - Saving city Spb
+2025-02-04 23:18:34,753 - app - INFO - Creating periodic weather update task for city ID 2
+2025-02-04 23:18:34,755 - app - INFO - Starting periodic weather update for city 2
+2025-02-04 23:18:34,757 - app - INFO - Closing database session
+2025-02-04 23:18:42,863 - app - INFO - Creating database session
+2025-02-04 23:18:42,865 - app - INFO - Requesting weather for city 'Spb' at time 2025-02-04 12:00:00
+2025-02-04 23:18:42,865 - app - INFO - Getting city by name Spb
+2025-02-04 23:18:42,868 - app - INFO - Trying to get weather from DB
+2025-02-04 23:18:42,869 - app - INFO - Weather found in DB
+2025-02-04 23:18:42,869 - app - INFO - Building weather response
+2025-02-04 23:18:42,871 - app - INFO - Closing database session
+2025-02-04 23:18:49,754 - app - INFO - Creating database session
+2025-02-04 23:18:49,755 - app - INFO - Weather update started for city 2
+2025-02-04 23:18:49,755 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 23:18:49,945 - app - INFO - Parsing weather data
+2025-02-04 23:18:49,955 - app - INFO - Weather updated for city 2
+2025-02-04 23:18:49,956 - app - INFO - Closing database session
+2025-02-04 23:19:04,960 - app - INFO - Creating database session
+2025-02-04 23:19:04,961 - app - INFO - Weather update started for city 2
+2025-02-04 23:19:04,961 - app - INFO - Requesting weather by open-meteo API
+2025-02-04 23:19:05,166 - app - INFO - Parsing weather data
+2025-02-04 23:19:05,172 - app - INFO - Weather updated for city 2
+2025-02-04 23:19:05,172 - app - INFO - Closing database session
