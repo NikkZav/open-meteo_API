@@ -2,14 +2,13 @@ from http import HTTPStatus
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from depends import get_city_service
-from services.city_service import CityService
-from schemas.city import CityResponse, City, CityParams
-from utils.exceptions import SameCityExistsError
-from utils.log import logger
-from services.update_weather_services import \
+from app.depends import get_city_service
+from app.schemas.city import City, CityParams, CityResponse
+from app.services.city_service import CityService
+from app.services.update_weather_services import \
     create_periodic_weather_update_task
-
+from app.utils.exceptions import SameCityExistsError
+from app.utils.log import logger
 
 router = APIRouter()
 

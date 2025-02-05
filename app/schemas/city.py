@@ -1,9 +1,10 @@
 from pydantic import BaseModel
 
+from app.utils.exceptions import WeatherInCityNotFoundError
+from app.utils.log import logger
+
 from .coordinates import Coordinates
 from .weather import Weather, WeatherResponse
-from utils.exceptions import WeatherInCityNotFoundError
-from utils.log import logger
 
 
 class City(BaseModel):

@@ -1,12 +1,13 @@
 import asyncio
-from sqlalchemy.ext.asyncio import AsyncSession
-from schemas.city import City
-from repositories.db import get_db, transaction
-from repositories.city_repository import CityRepository
-from repositories.weather_repository import WeatherRepository
-from utils.exceptions import CityNotFoundError, OpenMeteoAPIError
-from utils.log import logger
 
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.repositories.city_repository import CityRepository
+from app.repositories.db import get_db, transaction
+from app.repositories.weather_repository import WeatherRepository
+from app.schemas.city import City
+from app.utils.exceptions import CityNotFoundError, OpenMeteoAPIError
+from app.utils.log import logger
 
 tasks: dict[int, asyncio.Task] = {}
 
@@ -17,7 +18,8 @@ async def weather_update(city: City, db: AsyncSession) -> None:
     city_repo = CityRepository(db)
 
     new_weather_records = await weather_repo.get_weather_records_by_coord(
-        city.coordinates)
+        city.coordinates
+    )
     await city_repo.update_weather_records(city.id, new_weather_records)
 
 

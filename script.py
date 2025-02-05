@@ -1,9 +1,10 @@
-import uvicorn
-from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
-from routing import cities, weather
-from repositories.db import create_tables
+import uvicorn
+from fastapi import FastAPI
+
+from app.repositories.db import create_tables
+from app.routing import cities, weather
 
 
 @asynccontextmanager

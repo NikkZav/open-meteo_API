@@ -1,14 +1,14 @@
-from fastapi import APIRouter, Depends, HTTPException
 from datetime import datetime
 
-from schemas.coordinates import Coordinates
-from schemas.weather import WeatherQueryParams, WeatherResponse
-from depends import get_weather_service
-from services.weather_service import WeatherService
-from utils.exceptions import (CityNotFoundError, OpenMeteoAPIError,
-                              TimeRangeError)
-from utils.log import logger
+from fastapi import APIRouter, Depends, HTTPException
 
+from app.depends import get_weather_service
+from app.schemas.coordinates import Coordinates
+from app.schemas.weather import WeatherQueryParams, WeatherResponse
+from app.services.weather_service import WeatherService
+from app.utils.exceptions import (CityNotFoundError, OpenMeteoAPIError,
+                                  TimeRangeError)
+from app.utils.log import logger
 
 router = APIRouter()
 
@@ -20,8 +20,8 @@ router = APIRouter()
     responses={
         200: {"description": "Успешное получение данных о погоде"},
         404: {"description": "Город не найден"},
-        503: {"description": "Сервис погоды недоступен"}
-    }
+        503: {"description": "Сервис погоды недоступен"},
+    },
 )
 async def get_weather_endpoint(
     coordinates: Coordinates = Depends(),
@@ -48,8 +48,8 @@ async def get_weather_endpoint(
         200: {"description": "Успешное получение данных о погоде для города"},
         404: {"description": "Город не найден"},
         503: {"description": "Сервис погоды недоступен"},
-        400: {"description": "Неверный диапазон времени"}
-    }
+        400: {"description": "Неверный диапазон времени"},
+    },
 )
 async def get_weather_in_city_endpoint(
     city_name: str,
@@ -64,7 +64,8 @@ async def get_weather_in_city_endpoint(
     """
     logger.info(f"Requesting weather for city '{city_name}' at time {time}")
     try:
-        weather = await weather_service.get_weather_in_city_at_time(city_name, time)
+        weather = await weather_service.get_weather_in_city_at_time(
+            city_name, time)
     except CityNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except OpenMeteoAPIError as e:

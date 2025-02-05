@@ -1,4 +1,4 @@
-from .log import logger
+from app.utils.log import logger
 
 
 class OpenMeteoAPIError(Exception):

@@ -1,11 +1,13 @@
+from typing import AsyncGenerator
+
 from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
-from repositories.db import get_db
-from repositories.city_repository import CityRepository
-from repositories.weather_repository import WeatherRepository
-from services.weather_service import WeatherService
-from services.city_service import CityService
-from typing import AsyncGenerator
+
+from app.repositories.city_repository import CityRepository
+from app.repositories.db import get_db
+from app.repositories.weather_repository import WeatherRepository
+from app.services.city_service import CityService
+from app.services.weather_service import WeatherService
 
 
 async def get_db_session() -> AsyncGenerator[AsyncSession, None]:

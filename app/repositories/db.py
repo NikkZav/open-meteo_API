@@ -1,12 +1,12 @@
 from contextlib import asynccontextmanager
-
-from sqlalchemy.ext.asyncio import (AsyncEngine, AsyncSession,
-                                    create_async_engine, )
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from utils.log import logger
 from typing import AsyncGenerator
 
+from sqlalchemy.ext.asyncio import (AsyncEngine, AsyncSession,
+                                    create_async_engine)
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+from app.utils.log import logger
 
 DATABASE_URL = "sqlite+aiosqlite:///./weather.db"
 

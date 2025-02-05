@@ -1,7 +1,8 @@
 from datetime import datetime
 
 from pydantic import BaseModel
-from utils.log import logger
+
+from app.utils.log import logger
 
 
 class Weather(BaseModel):
