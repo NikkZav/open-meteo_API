@@ -33,7 +33,7 @@ async def add_city_endpoint(
     logger.info(f"Received a request to add a city '{city.name}'")
     try:
         # Добавляем новый город в БД
-        new_city = city_service.add_city(city)
+        new_city = await city_service.add_city(city)
         # Создаем задачу обновления погоды для нового города
         create_periodic_weather_update_task(city=new_city)
     except SameCityExistsError as e:
@@ -52,9 +52,11 @@ async def add_city_endpoint(
         200: {"description": "Список городов получен"},
     }
 )
-def get_cities_endpoint(include_weather: bool | None = None,
-                        city_service: CityService = Depends(get_city_service)):
+async def get_cities_endpoint(include_weather: bool | None = None,
+                              city_service: CityService = Depends(
+                                  get_city_service)
+                              ):
     """Метод возвращает список городов. Есть опция вывести вместе с погодой"""
     logger.info("Received a request to get the list of cities")
-    cities: list[City | str] = city_service.get_cities(include_weather)
+    cities: list[City | str] = await city_service.get_cities(include_weather)
     return CityResponse.build_response(cities, include_weather)

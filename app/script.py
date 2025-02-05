@@ -1,14 +1,20 @@
 import uvicorn
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
 
 from routing import cities, weather
 from repositories.db import create_tables
 
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Создание таблиц перед запуском сервера
+    await create_tables()
+    yield
 
-# Создаём таблицы при старте приложения
-create_tables()
+
+app = FastAPI(lifespan=lifespan)
+
 
 app.include_router(weather.router, prefix="/api")
 app.include_router(cities.router, prefix="/api")

@@ -1,41 +1,42 @@
-from .models import CityORM, WeatherORM
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import and_
+from sqlalchemy.future import select
+from sqlalchemy.sql import Select
+from sqlalchemy.orm import joinedload
+from repositories.models import CityORM, WeatherORM
 from schemas.coordinates import Coordinates
 from schemas.city import City
 from schemas.weather import Weather
-from sqlalchemy import and_
-from sqlalchemy.sql import Select
-from sqlalchemy.orm import Session, joinedload
-from sqlalchemy.future import select
 from utils.exceptions import CityNotFoundError
 from utils.log import logger
-from .db import transaction
+from repositories.db import transaction
 
 
 class CityRepository:
 
-    def __init__(self, db_session: Session):
+    def __init__(self, db_session: AsyncSession):
         self.db_session = db_session
 
-    def get_city_by_id(self, city_id: int) -> City:
+    async def get_city_by_id(self, city_id: int) -> City:
         logger.info(f"Getting city by id {city_id}")
         try:
-            city_orm = self._get_city_orm(CityORM.id == city_id)
+            city_orm = await self._get_city_orm(CityORM.id == city_id)
         except CityNotFoundError:
             raise CityNotFoundError(f"City with id {city_id} not found")
         return self._convert_orm_to_city(city_orm)
 
-    def get_city_by_name(self, city_name: str) -> City:
+    async def get_city_by_name(self, city_name: str) -> City:
         logger.info(f"Getting city by name {city_name}")
         try:
-            city_orm = self._get_city_orm(CityORM.name == city_name)
+            city_orm = await self._get_city_orm(CityORM.name == city_name)
         except CityNotFoundError:
             raise CityNotFoundError(f"City with name {city_name} not found")
         return self._convert_orm_to_city(city_orm)
 
-    def get_city_by_coord(self, coordinates: Coordinates) -> City:
+    async def get_city_by_coord(self, coordinates: Coordinates) -> City:
         logger.info(f"Getting city by coordinates {coordinates}")
         try:
-            city_orm = self._get_city_orm(
+            city_orm = await self._get_city_orm(
                 and_(
                     CityORM.latitude == coordinates.latitude,
                     CityORM.longitude == coordinates.longitude
@@ -46,20 +47,20 @@ class CityRepository:
                                     f" not found")
         return self._convert_orm_to_city(city_orm)
 
-    def get_cities(self) -> list[City]:
+    async def get_cities(self) -> list[City]:
         logger.info("Getting all cities")
-        result = self.db_session.execute(self._get_select_cities_query())
+        result = await self.db_session.execute(self._get_select_cities_query())
         cities_orm = result.unique().scalars().all()
         return [self._convert_orm_to_city(city_orm) for city_orm in cities_orm]
 
-    def get_city_names(self) -> list[str]:
+    async def get_city_names(self) -> list[str]:
         logger.info("Getting all city names")
-        result = self.db_session.execute(select(CityORM.name))
+        result = await self.db_session.execute(select(CityORM.name))
         return list(result.scalars())
 
-    def save_city(self, city: City) -> City:
+    async def save_city(self, city: City) -> City:
         logger.info(f"Saving city {city.name}")
-        with transaction(self.db_session):
+        async with transaction(self.db_session):
             city_orm = CityORM(
                 name=city.name,
                 latitude=city.coordinates.latitude,
@@ -71,16 +72,17 @@ class CityRepository:
 
         return self._convert_orm_to_city(city_orm)
 
-    def update_weather_records(self, city_id: int,
-                               new_weather_records: list[Weather]) -> None:
+    async def update_weather_records(
+            self, city_id: int,
+            new_weather_records: list[Weather]) -> None:
         """
         Обновляет погодные записи для города с заданным ID.
         Имеющиеся записи обновляются, а тех, которых нет - добавляются.
         """
-        city_orm = self._get_city_orm(CityORM.id == city_id)
+        city_orm = await self._get_city_orm(CityORM.id == city_id)
         existing_records = {record.time: record for record
                             in city_orm.weather_records}
-        with transaction(self.db_session):
+        async with transaction(self.db_session):
             for weather in new_weather_records:
                 if weather.time in existing_records:
                     self._update_record(weather,
@@ -111,14 +113,14 @@ class CityRepository:
         self.db_session.add(new_record)
 
     @staticmethod
-    def _get_select_cities_query() -> Select[CityORM]:
+    def _get_select_cities_query() -> Select:
         """Возвращает базовый запрос для CityORM
         с предзагрузкой weather_records."""
         return select(CityORM).options(joinedload(CityORM.weather_records))
 
-    def _get_city_orm(self, *where_clauses) -> CityORM:
+    async def _get_city_orm(self, *where_clauses) -> CityORM:
         query = self._get_select_cities_query().where(*where_clauses)
-        result = self.db_session.execute(query)
+        result = await self.db_session.execute(query)
         city_orm = result.scalars().first()
         if city_orm is None:
             raise CityNotFoundError("City not found")

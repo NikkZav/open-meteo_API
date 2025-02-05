@@ -1,26 +1,24 @@
 import asyncio
-
-from requests import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 from schemas.city import City
-from repositories.db import get_db_context, transaction
+from repositories.db import get_db, transaction
 from repositories.city_repository import CityRepository
 from repositories.weather_repository import WeatherRepository
 from utils.exceptions import CityNotFoundError, OpenMeteoAPIError
-from sqlalchemy.orm import Session
 from utils.log import logger
 
 
 tasks: dict[int, asyncio.Task] = {}
 
 
-def weather_update(city: City, db: Session) -> None:
+async def weather_update(city: City, db: AsyncSession) -> None:
     logger.info(f"Weather update started for city {city.id}")
     weather_repo = WeatherRepository(db)
     city_repo = CityRepository(db)
 
-    new_weather_records = weather_repo.get_weather_records_by_coord(
+    new_weather_records = await weather_repo.get_weather_records_by_coord(
         city.coordinates)
-    city_repo.update_weather_records(city.id, new_weather_records)
+    await city_repo.update_weather_records(city.id, new_weather_records)
 
 
 async def periodic_weather_update(city: City) -> None:
@@ -31,9 +29,9 @@ async def periodic_weather_update(city: City) -> None:
     while True:
         await asyncio.sleep(15)  # 15 минут (для тестирования 15сек)
 
-        with get_db_context() as db, transaction(db):
+        async with get_db() as db, transaction(db):
             try:
-                weather_update(city, db)
+                await weather_update(city, db)
                 logger.info(f"Weather updated for city {city.id}")
             except OpenMeteoAPIError as e:
                 logger.warning(f"OpenMeteo error for city {city.id}: {str(e)}")

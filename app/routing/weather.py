@@ -51,7 +51,7 @@ async def get_weather_endpoint(
         400: {"description": "Неверный диапазон времени"}
     }
 )
-def get_weather_in_city_endpoint(
+async def get_weather_in_city_endpoint(
     city_name: str,
     time: datetime,
     weather_query_params: WeatherQueryParams = Depends(),
@@ -64,7 +64,7 @@ def get_weather_in_city_endpoint(
     """
     logger.info(f"Requesting weather for city '{city_name}' at time {time}")
     try:
-        weather = weather_service.get_weather_in_city_at_time(city_name, time)
+        weather = await weather_service.get_weather_in_city_at_time(city_name, time)
     except CityNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except OpenMeteoAPIError as e:

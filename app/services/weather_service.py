@@ -23,12 +23,13 @@ class WeatherService:
         logger.info(f"Getting current weather for coordinates {coordinates}")
         try:  # В начале пытаемся получить погоду из БД
             logger.info("Trying to get weather from DB")
-            city = self.city_repo.get_city_by_coord(coordinates)
+            city = await self.city_repo.get_city_by_coord(coordinates)
             weather_records = city.get_weather_records()
             weather = self._search_closest_to_time_weather_record(
                 weather_records=weather_records,
                 time=datetime.now()
             )
+            logger.info("Weather found in DB")
         except (CityNotFoundError, WeatherInCityNotFoundError):
             logger.warning("Weather not found in DB. Fetching from API")
             weather = await self._get_weather_closest_to_time(
@@ -37,8 +38,8 @@ class WeatherService:
             )
         return weather
 
-    def get_weather_in_city_at_time(self, city_name: str,
-                                    time: datetime) -> Weather:
+    async def get_weather_in_city_at_time(self, city_name: str,
+                                          time: datetime) -> Weather:
         """
         Возвращает погоду в городе во время, наиболее близкое к указанному.
         Запросом к Open-Meteo API отправляется только тогда, если его нет в БД.
@@ -46,7 +47,7 @@ class WeatherService:
         if time.date() != date.today():
             raise TimeRangeError("The time should be today")
 
-        city = self.city_repo.get_city_by_name(city_name)
+        city = await self.city_repo.get_city_by_name(city_name)
 
         try:  # В начале пытаемся получить погоду из БД
             logger.info("Trying to get weather from DB")
@@ -57,7 +58,7 @@ class WeatherService:
             logger.info("Weather found in DB")
         except WeatherInCityNotFoundError:  # Если в БД нет, то запрос к API
             logger.info("Getting weather from API")
-            weather = self._get_weather_closest_to_time(city.coordinates, time)
+            weather = await self._get_weather_closest_to_time(city.coordinates, time)
         return weather
 
     def _search_closest_to_time_weather_record(self,
